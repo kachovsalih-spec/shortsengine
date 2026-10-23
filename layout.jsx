@@ -1,12 +1,16 @@
+import { ClerkProvider } from "@clerk/nextjs";
+
+export const metadata = {
+  title: "ShortsEngine AI",
+  description: "Генерирай вирусни сценарии за Reels, TikTok & Shorts за секунди",
+};
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="bg">
-      <head>
-        <script src="https://cdn.tailwindcss.com"></script>
-      </head>
-      <body className="bg-slate-950 text-white min-h-screen font-sans">
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="bg">
+        <body>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
