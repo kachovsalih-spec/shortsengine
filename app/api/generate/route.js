@@ -40,7 +40,6 @@ export async function POST(req) {
     });
 
     const scriptData = JSON.parse(completion.choices[0].message.content);
-     const scriptData = JSON.parse(completion.choices[0].message.content);
     return NextResponse.json({ success: true, data: scriptData });
   } catch (error) {
     console.error("Грешка при генерация:", error);
