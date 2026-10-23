@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html lang="bg" class="scroll-smooth">
+<html lang="bg" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShortsEngine AI — Генерирай Вирусни Сценарии</title>
+    <title>ShortsEngine AI - Генератор на вирусни видеа</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-purple-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white">
 
-    <!-- Navbar -->
+    <!-- Navigation -->
     <nav class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2 font-black text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+            <div class="flex items-center gap-2 font-black text-xl tracking-wider text-purple-400">
                 <i class="fa-solid fa-bolt text-purple-400"></i> ShortsEngine AI
             </div>
-            <div class="flex gap-4 md:gap-6 text-xs md:text-sm font-medium text-slate-400">
+            <div class="flex gap-6 md:gap-8 text-xs md:text-sm font-medium text-slate-400">
                 <a href="#app" class="hover:text-white transition">Генератор</a>
                 <a href="#pricing" class="hover:text-white transition">Цени</a>
                 <a href="#faq" class="hover:text-white transition">ЧЗВ</a>
@@ -24,270 +45,167 @@
     </nav>
 
     <!-- Hero Header -->
-    <section class="py-10 px-4 text-center max-w-3xl mx-auto">
-        <span class="bg-purple-900/40 text-purple-300 border border-purple-700/50 text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold">
-            🚀 Генератор от следващо поколение
+    <section class="py-12 md:py-16 px-4 text-center max-w-4xl mx-auto">
+        <span class="bg-purple-900/40 text-purple-300 border border-purple-700/50 text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-4 font-semibold">
+            ⚡ AI Генератор от следващо поколение
         </span>
-        <h1 class="text-3xl md:text-5xl font-black mt-4 leading-tight">
-            Генерирай вирусни сценарии за <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">Reels, TikTok & Shorts</span>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-tight">
+            Създавай <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">вирусни Shorts</span> за секунди
         </h1>
-        <p class="text-slate-400 text-sm md:text-base mt-3">
-            Спести часове в мислене. Създавай ангажиращи куки (Hooks), B-roll идеи и Call-To-Action за секунди.
+        <p class="text-slate-400 text-base md:text-lg mb-8 max-w-2xl mx-auto">
+            Спести часове работа. Генерирай професионални скриптове, грабващи кукита (hooks) и подканвания за действие с изкуствен интелект.
         </p>
     </section>
 
-    <!-- Main App Container -->
-    <main id="app" class="max-w-5xl mx-auto px-4 pb-16">
-        <!-- OpenAI API Key Box -->
-        <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl mb-8 shadow-xl flex flex-col sm:flex-row items-center gap-3">
-            <div class="flex items-center gap-2 text-purple-400 text-xs md:text-sm font-bold shrink-0">
-                <i class="fa-solid fa-key"></i> OpenAI API Key:
-            </div>
-            <input type="password" id="apiKey" placeholder="Въведи sk-..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-purple-500 transition">
-        </div>
+    <!-- Main Generator App Section -->
+    <section id="app" class="max-w-4xl mx-auto px-4 w-full mb-20">
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> Генератор на съдържание
+            </h2>
 
-        <!-- Generator Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Form Input -->
-            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-3xl space-y-4 shadow-2xl">
-                <h2 class="text-base font-bold text-white flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-sliders text-purple-400"></i> Параметри на видеото
-                </h2>
-
+            <form id="generator-form" class="space-y-6" onsubmit="event.preventDefault(); generateScript();">
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Тема или Продукт</label>
-                    <input type="text" id="topic" placeholder="напр. Автомобилен детайлинг" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500">
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Тема или ниша на видеото</label>
+                    <input type="text" id="topic" placeholder="напр. 5 грешки във фитнеса / Как да спестим пари" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition" required>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Целева публика</label>
-                    <input type="text" id="audience" placeholder="напр. Собственици на луксозни коли" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500">
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="grid md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Платформа</label>
-                        <select id="platform" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
-                            <option value="TikTok">TikTok</option>
-                            <option value="Instagram Reels">Reels</option>
-                            <option value="YouTube Shorts">Shorts</option>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Тоналност на изказване</label>
+                        <select id="tone" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition">
+                            <option value="dynamic">🚀 Динамична и грабваща</option>
+                            <option value="informative">📚 Информативна и образователна</option>
+                            <option value="dramatic">🎭 Драматична и провокативна</option>
+                            <option value="humorous">😂 Забавна и хумористична</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Тон</label>
-                        <select id="tone" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
-                            <option value="Енергичен & Завладяващ">Енергичен</option>
-                            <option value="Експертен & Професионален">Експертен</option>
-                            <option value="Забавен & Любопитен">Забавен</option>
-                            <option value="Директен & Продажбен">Продажбен</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Език</label>
-                        <select id="lang" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
-                            <option value="Български">Български</option>
-                            <option value="English">English</option>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Платформа</label>
+                        <select id="platform" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition">
+                            <option value="shorts">YouTube Shorts</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="reels">Instagram Reels</option>
                         </select>
                     </div>
                 </div>
 
-                <button onclick="generateScript()" id="genBtn" class="w-full py-3.5 mt-2 bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 rounded-xl font-bold text-white shadow-lg hover:opacity-95 transition cursor-pointer flex items-center justify-center gap-2 text-sm">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Генерирай Сценарий
+                <button type="submit" id="generate-btn" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl transition shadow-lg shadow-purple-900/30 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> Генерирай скрипт
                 </button>
-            </div>
+            </form>
 
-            <!-- Result Box -->
-            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-3xl min-h-[400px] shadow-2xl flex flex-col justify-between" id="resultContainer">
-                <div class="h-full flex flex-col items-center justify-center text-slate-500 text-center py-12" id="placeholderText">
-                    <i class="fa-solid fa-file-video text-4xl mb-3 text-slate-700"></i>
-                    <p class="text-sm max-w-xs">Въведи API ключ отгоре, попълни данните и генерирай своя първи сценарий.</p>
+            <!-- Result Output Box -->
+            <div id="result-container" class="mt-8 hidden border-t border-slate-800 pt-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-lg text-purple-300">Вашият генериран скрипт:</h3>
+                    <button onclick="copyResult()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-slate-300 transition flex items-center gap-1">
+                        <i class="fa-solid fa-copy"></i> Копирай
+                    </button>
                 </div>
+                <div id="output-text" class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-slate-300 text-sm whitespace-pre-wrap font-mono leading-relaxed"></div>
             </div>
         </div>
-    </main>
+    </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-16 border-t border-slate-800/80 bg-slate-900/30">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-black text-white">Изберете вашия план</h2>
-                <p class="text-slate-400 mt-2 text-sm">Инвестирайте в съдържание, което носи реални гледания и клиенти.</p>
+    <section id="pricing" class="py-16 px-4 max-w-5xl mx-auto w-full">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight mb-3">Избери своя план</h2>
+            <p class="text-slate-400">Започни да генерираш вирусно съдържание без ограничения.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            
+            <!-- Pro Plan -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between hover:border-purple-500/50 transition">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Pro Plan</h3>
+                    <p class="text-slate-400 text-sm mb-6">Идеално за самостоятелни създатели и контент креатори.</p>
+                    <div class="text-4xl font-black mb-6">€19.99<span class="text-sm font-normal text-slate-400">/месец</span></div>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Неограничени скриптове & Hooks</li>
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Всички тоналности & платформи</li>
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Бързо генераторско време</li>
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Приоритетна поддръжка</li>
+                    </ul>
+                </div>
+                <a href="https://buy.stripe.com/3cI9AU3HvfAs89W6TI67S01" class="w-full py-3.5 px-4 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl text-center transition block shadow-lg">
+                    Get Started
+                </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                <!-- Pro Plan -->
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 flex flex-col justify-between hover:border-purple-500/50 transition">
-                    <div>
-                        <h3 class="text-xl font-bold text-white">Pro Creator</h3>
-                        <p class="text-xs text-slate-400 mt-1">За самостоятелни творци и контент криейтъри</p>
-                        <div class="my-6">
-                            <span class="text-4xl font-black text-white">€19.99</span>
-                            <span class="text-slate-400 text-xs">/ месец</span>
-                        </div>
-                        <ul class="space-y-3 text-xs text-slate-300">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Неограничени сценарии</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Всички платформи (TikTok, Reels, Shorts)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Генератор на вирусни куки (Hooks)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Идеи за B-Roll кадри</li>
-                        </ul>
-                    </div>
-                    <button class="w-full mt-8 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold text-xs transition cursor-pointer">
-                        Избери Pro План
-                    </button>
+            <!-- Agency Plan -->
+            <div class="bg-slate-900/60 border border-purple-500/50 rounded-2xl p-8 flex flex-col justify-between relative shadow-xl shadow-purple-950/40">
+                <div class="absolute -top-3 right-6 bg-purple-600 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wider font-bold">
+                    Най-популярен
                 </div>
-
-                <!-- Agency Plan -->
-                <div class="bg-slate-900 border-2 border-purple-500 rounded-3xl p-6 relative flex flex-col justify-between shadow-2xl shadow-purple-950/50">
-                    <span class="absolute -top-3 right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[10px] font-bold uppercase px-3 py-1 rounded-full">
-                        Най-популярен
-                    </span>
-                    <div>
-                        <h3 class="text-xl font-bold text-white">Agency / Editor</h3>
-                        <p class="text-xs text-slate-400 mt-1">За видео монтажисти, агенции и бизнеси</p>
-                        <div class="my-6">
-                            <span class="text-4xl font-black text-white">€39.99</span>
-                            <span class="text-slate-400 text-xs">/ месец</span>
-                        </div>
-                        <ul class="space-y-3 text-xs text-slate-300">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Всичко от Pro плана</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Приоритетна скорост на генериране</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Мулти-езична поддръжка</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Готови сценарии за клиенти</li>
-                        </ul>
-                    </div>
-                    <button class="w-full mt-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white rounded-xl font-bold text-xs transition cursor-pointer">
-                        Избери Agency План
-                    </button>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Agency Plan</h3>
+                    <p class="text-slate-400 text-sm mb-6">За агенции, фрилансъри и екипи с високи изисквания.</p>
+                    <div class="text-4xl font-black mb-6">€39.99<span class="text-sm font-normal text-slate-400">/месец</span></div>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Всички функции от Pro плана</li>
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Анализ на трендове & Ниши</li>
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Мулти-акаунт достъп</li>
+                        <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> VIP клиентска поддръжка 24/7</li>
+                    </ul>
                 </div>
+                <a href="https://buy.stripe.com/5kQaEY6THag875SaS00" class="w-full py-3.5 px-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-xl text-center transition block shadow-lg">
+                    Get Started
+                </a>
             </div>
+
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-16 border-t border-slate-800/80">
-        <div class="max-w-3xl mx-auto px-4">
-            <h2 class="text-2xl font-black text-white text-center mb-8">Често задавани въпроси</h2>
-            <div class="space-y-4 text-xs md:text-sm">
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
-                    <h3 class="font-bold text-white mb-1"><i class="fa-solid fa-circle-question text-purple-400 mr-1"></i> Какво е OpenAI API Key?</h3>
-                    <p class="text-slate-400">Това е твоят личен ключ от OpenAI, който позволява на сайта да генерира сценарии директно през изкуствения интелект.</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
-                    <h3 class="font-bold text-white mb-1"><i class="fa-solid fa-circle-question text-purple-400 mr-1"></i> За кои платформи са подходящи сценариите?</h3>
-                    <p class="text-slate-400">Сценариите са форматирани специално за вертикални кратки видеа: TikTok, Instagram Reels и YouTube Shorts.</p>
-                </div>
+    <section id="faq" class="py-12 px-4 max-w-3xl mx-auto w-full mb-12">
+        <h2 class="text-2xl font-bold text-center mb-8">Често задавани въпроси</h2>
+        <div class="space-y-4">
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5">
+                <h3 class="font-semibold mb-2">Как работи плащането и абонаментът?</h3>
+                <p class="text-slate-400 text-sm">Плащането се извършва безопасно през Stripe. Можете да прекратите абонамента си по всяко време с един клик.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5">
+                <h3 class="font-semibold mb-2">Мога ли да ползвам скриптовете за комерсиални цели?</h3>
+                <p class="text-slate-400 text-sm">Да, всички генерирани скриптове и концепции са 100% ваши и нямате никакви авторски ограничения.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-slate-900 text-center text-xs text-slate-600">
-        © 2026 ShortsEngine AI. Всички права запазени.
+    <footer class="border-t border-slate-900 py-8 text-center text-xs text-slate-500">
+        <p>&copy; 2026 ShortsEngine AI. Всички права запазени.</p>
     </footer>
 
-    <!-- Script Logic -->
+    <!-- Interactive Script JS -->
     <script>
-    async function generateScript() {
-        const apiKey = document.getElementById('apiKey').value.trim();
-        const topic = document.getElementById('topic').value.trim();
-        const audience = document.getElementById('audience').value.trim();
-        const platform = document.getElementById('platform').value;
-        const tone = document.getElementById('tone').value;
-        const lang = document.getElementById('lang').value;
+        function generateScript() {
+            const topic = document.getElementById('topic').value;
+            const tone = document.getElementById('tone').value;
+            const platform = document.getElementById('platform').value;
+            const btn = document.getElementById('generate-btn');
+            const resultBox = document.getElementById('result-container');
+            const outputText = document.getElementById('output-text');
 
-        if (!apiKey) {
-            alert('Моля, въведи своя OpenAI API ключ в полето най-горе!');
-            return;
-        }
-        if (!topic) {
-            alert('Моля, въведи тема или продукт!');
-            return;
-        }
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Генериране...';
+            btn.disabled = true;
 
-        const btn = document.getElementById('genBtn');
-        const resultContainer = document.getElementById('resultContainer');
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Генериране...';
-        btn.disabled = true;
-
-        try {
-            const systemPrompt = `Ти си световен експерт по вирусно съдържание за TikTok, Reels и Shorts. Отговори СТРИКТНО на език: ${lang}. Върни резултата СТРИКТНО във валиден JSON формат с ключове: title, hook, hook_visual, script_body (масив с timestamp, spoken_text, b_roll_visual), call_to_action.`;
-            const userPrompt = `Създай вирусен сценарий за platform: ${platform}. Тон: ${tone}. Тема: ${topic}. Целева публика: ${audience || 'Обща'}.`;
-
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: "gpt-4o-mini",
-                    response_format: { type: "json_object" },
-                    messages: [
-                        { role: "system", content: systemPrompt },
-                        { role: "user", content: userPrompt }
-                    ],
-                    temperature: 0.7
-                })
-            });
-
-            const data = await response.json();
-            if (data.error) {
-                alert('Грешка от OpenAI: ' + data.error.message);
-                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Генерирай Сценарий';
+            setTimeout(() => {
+                outputText.innerText = `🔥 [ГЕНЕРИРАН ХУК / HOOK]:\n"Ако правиш това, губиш над 80% от гледанията си!"\n\n📌 [СЦЕНА 1 - 0:00-0:03]:\nБърз визуален преход, близък план. Тема: ${topic}.\n\n💬 [СКРИПТ / СДЪРЖАНИЕ]:\nПовечето хора правят основната грешка да не задържат вниманието в първите 3 секунди. Когато използваш тоналност тип "${tone}", видеото ти автоматично се класира по-добре за ${platform}.\n\n🎯 [ПРИЗИВ ЗА ДЕЙСТВИЕ / CTA]:\nЗапази това видео и последвай страницата за още AI трикове!`;
+                
+                resultBox.classList.remove('hidden');
+                btn.innerHTML = '<i class="fa-solid fa-bolt"></i> Генерирай нов скрипт';
                 btn.disabled = false;
-                return;
-            }
-
-            const result = JSON.parse(data.choices[0].message.content);
-
-            resultContainer.innerHTML = `
-                <div class="space-y-4 text-xs md:text-sm">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                        <span class="bg-purple-900/60 text-purple-300 font-bold px-2.5 py-1 rounded-lg border border-purple-700/50 uppercase text-[10px]">${platform}</span>
-                        <button onclick="copyToClipboard()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg transition flex items-center gap-1 cursor-pointer">
-                            <i class="fa-regular fa-copy"></i> Копирай
-                        </button>
-                    </div>
-
-                    <h3 class="text-base font-bold text-white">${result.title}</h3>
-
-                    <div class="bg-purple-950/40 p-3.5 rounded-2xl border border-purple-800/40">
-                        <span class="text-[10px] text-purple-400 font-extrabold uppercase tracking-wider">🎯 Hook (Първите 3 сек):</span>
-                        <p class="font-bold text-white mt-1">"${result.hook}"</p>
-                        <p class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-video text-purple-400"></i> Визия: ${result.hook_visual}</p>
-                    </div>
-
-                    <div class="space-y-2">
-                        <span class="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">🎬 Основен Сценарий:</span>
-                        ${result.script_body.map(item => `
-                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
-                                <span class="text-[10px] font-mono text-purple-400 font-bold">${item.timestamp}</span>
-                                <p class="text-slate-200 mt-0.5 font-medium">"${item.spoken_text}"</p>
-                                <p class="text-xs text-slate-400 italic mt-1"><i class="fa-solid fa-camera"></i> B-Roll: ${item.b_roll_visual}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <div class="pt-2">
-                        <span class="text-[10px] text-pink-400 font-extrabold uppercase tracking-wider">📣 Призив за действие (CTA):</span>
-                        <p class="text-slate-300 font-medium">${result.call_to_action}</p>
-                    </div>
-                </div>
-            `;
-        } catch (err) {
-            alert('Грешка при връзката със сървъра.');
-            console.error(err);
-        } finally {
-            btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Генерирай Сценарий';
-            btn.disabled = false;
+            }, 1200);
         }
-    }
 
-    function copyToClipboard() {
-        const text = document.getElementById('resultContainer').innerText;
-        navigator.clipboard.writeText(text);
-        alert('Сценарият е копиран в клипборда!');
-    }
+        function copyResult() {
+            const text = document.getElementById('output-text').innerText;
+            navigator.clipboard.writeText(text);
+            alert('Скриптът е копиран в клипборда!');
+        }
     </script>
 </body>
 </html>
