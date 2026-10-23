@@ -1,4 +1,4 @@
-mport { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata = {
   title: "ShortsEngine AI",
