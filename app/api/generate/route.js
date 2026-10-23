@@ -40,8 +40,11 @@ export async function POST(req) {
     });
 
     const scriptData = JSON.parse(completion.choices[0].message.content);
+     const scriptData = JSON.parse(completion.choices[0].message.content);
     return NextResponse.json({ success: true, data: scriptData });
-  }
   } catch (error) {
     console.error("Грешка при генерация:", error);
-    return NextResponse.json({ success: false, error: "Възникна грешка при генерацията." }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Възникна грешка при генерацията." });
+  }
+}
+    
