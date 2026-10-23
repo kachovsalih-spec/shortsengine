@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 
 export default function Home() {
+  const { isSignedIn, user } = useUser();
   const [topic, setTopic] = useState("");
   const [audience, setAudience] = useState("");
   const [platform, setPlatform] = useState("TikTok");
@@ -10,6 +12,10 @@ export default function Home() {
 
   const handleGenerate = async (e) => {
     e.preventDefault();
+    if (!isSignedIn) {
+      alert("Моля, влезте в профила си, за да използвате генератора.");
+      return;
+    }
     setLoading(true);
     setResult(null);
 
@@ -39,9 +45,28 @@ export default function Home() {
         <h1 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
           ShortsEngine AI 🚀
         </h1>
-        <a href="#pricing" className="bg-pink-600 hover:bg-pink-500 text-white font-semibold px-4 py-2 rounded-xl transition">
-          Вземи Достъп
-        </a>
+        
+        <div className="flex items-center gap-4">
+          {!isSignedIn ? (
+            <>
+              <SignInButton mode="modal">
+                <button className="text-slate-300 hover:text-white font-semibold transition">
+                  Вход
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <button className="bg-pink-600 hover:bg-pink-500 text-white font-semibold px-4 py-2 rounded-xl transition">
+                  Регистрация
+                </button>
+              </SignUpButton>
+            </>
+          ) : (
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-slate-400">Здравей, {user?.firstName || "потребител"}</span>
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          )}
+        </div>
       </header>
 
       {/* Hero Section */}
@@ -138,7 +163,7 @@ export default function Home() {
       {/* Pricing Section */}
       <section id="pricing" className="max-w-5xl mx-auto px-4 py-16 border-t border-slate-800 text-center">
         <h2 className="text-3xl font-extrabold mb-4">Избери своя план</h2>
-        <p className="text-slate-400 mb-12">Получи неограничен достъп до изкуствения интелект и скалирай съдържанието си.</p>
+        <p className="text-slate-400 mb-12">Получи неограничен достяп до изкуствения интелект и скалирай съдържанието си.</p>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {/* Pro Plan */}
@@ -158,7 +183,7 @@ export default function Home() {
               href="https://buy.stripe.com/3cI9AU3HvfAs89W6TI67S01"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-3 rounded-xl block transition"
+              className="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-3 text-center rounded-xl block transition"
             >
               Купи Pro План
             </a>
@@ -182,7 +207,7 @@ export default function Home() {
               href="https://buy.stripe.com/5kQaEY6THag875SaS00"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl block transition"
+              className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 text-center rounded-xl block transition"
             >
               Купи Agency План
             </a>
