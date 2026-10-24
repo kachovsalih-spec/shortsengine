@@ -12,8 +12,8 @@ export default function Home() {
   const [error, setError] = useState('');
 
   // Твоите реални Stripe Payment Links
-  const STRIPE_STARTER_LINK = "https://buy.stripe.com/3cI9AU3HvfAs89W6TI67S01
-  const STRIPE_PRO_LINK = "https://buy.stripe.com/5kQaEY6THag875Sa5U67S00
+  const STRIPE_STARTER_LINK = "https://buy.stripe.com/3cI9AU3HvfAs89W6TI67S01";
+  const STRIPE_PRO_LINK = "https://buy.stripe.com/5kQaEY6THag875Sa5U67S00";
 
   const handleGenerate = async (e) => {
     e.preventDefault();
