@@ -163,7 +163,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
     }}>
       <div style={{ maxWidth: '720px', margin: '0 auto' }}>
 
-        {/* HEADER */}
         <header style={{ textAlign: 'center', marginBottom: '40px' }}>
           <div style={{
             display: 'inline-flex',
@@ -198,7 +197,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
         </header>
 
         {!isLoggedIn ? (
-          /* LOGIN CARD */
           <section style={{
             background: '#121215',
             border: '1px solid rgba(220, 38, 38, 0.25)',
@@ -265,7 +263,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
               </div>
             )}
 
-            {/* GENERATOR CARD */}
             <section style={{
               background: '#121215',
               border: '1px solid #27272a',
@@ -274,10 +271,9 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
               marginBottom: '40px',
               boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)'
             }}>
-              {/* TOP BAR */}
               <div style={{
                 display: 'flex',
-                justify: 'space-between',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '24px',
                 borderBottom: '1px solid #18181b',
@@ -313,7 +309,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
                 </div>
               </div>
 
-              {/* FORM */}
               <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px' }}>
                   <div>
@@ -392,7 +387,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
               )}
             </section>
 
-            {/* PRICING */}
             {!isSubscribed && (
               <section style={{ textAlign: 'center', marginBottom: '50px' }}>
                 <h2 style={{ fontSize: '1.6rem', fontWeight: '800', marginBottom: '8px' }}>Избери абонамент</h2>
@@ -400,7 +394,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
                   
-                  {/* STARTER */}
                   <div style={{
                     background: '#121215',
                     border: '1px solid #27272a',
@@ -443,7 +436,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
                     </a>
                   </div>
 
-                  {/* PRO */}
                   <div style={{
                     background: '#121215',
                     border: '2px solid #dc2626',
@@ -483,3 +475,9 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
                     <a
                       href={STRIPE_PRO_LINK}
                       target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'block',
+                        marginTop: '28px',
+                        padding: '12px',
+                        background: '
