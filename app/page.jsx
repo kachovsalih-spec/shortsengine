@@ -163,7 +163,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
     }}>
       <div style={{ maxWidth: '760px', margin: '0 auto' }}>
 
-        {/* HEADER */}
         <header style={{ textAlign: 'center', marginBottom: '45px' }}>
           <div style={{
             display: 'inline-block',
@@ -175,8 +174,7 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
             fontSize: '0.82rem',
             fontWeight: '800',
             marginBottom: '18px',
-            letterSpacing: '0.5px',
-            boxShadow: '0 0 25px rgba(239, 68, 68, 0.15)'
+            letterSpacing: '0.5px'
           }}>
             ⚡ SHORTSENGINE AI
           </div>
@@ -191,13 +189,12 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
           }}>
             Генерирай вирални скриптове
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '1.05rem', margin: 0, fontWeight: '400' }}>
+          <p style={{ color: '#94a3b8', fontSize: '1.05rem', margin: 0 }}>
             Автоматизирай съдържанието си за TikTok, Reels & Shorts с изкуствен интелект.
           </p>
         </header>
 
         {!isLoggedIn ? (
-          /* LOGIN CARD */
           <section style={{
             background: 'rgba(20, 27, 45, 0.7)',
             backdropFilter: 'blur(12px)',
@@ -240,8 +237,7 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
                   borderRadius: '12px',
                   fontWeight: '800',
                   fontSize: '0.98rem',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 25px rgba(239, 68, 68, 0.35)'
+                  cursor: 'pointer'
                 }}
               >
                 {loading ? 'Зареждане...' : 'Продължи към Генератора 🚀'}
@@ -265,7 +261,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
               </div>
             )}
 
-            {/* GENERATOR CARD */}
             <section style={{
               background: 'rgba(20, 27, 45, 0.8)',
               backdropFilter: 'blur(12px)',
@@ -275,10 +270,9 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
               marginBottom: '45px',
               boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)'
             }}>
-              {/* TOP BAR */}
               <div style={{
                 display: 'flex',
-                justify: 'space-between',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '24px',
                 borderBottom: '1px solid #1e293b',
@@ -314,7 +308,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
                 </div>
               </div>
 
-              {/* FORM */}
               <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px' }}>
                   <div>
@@ -393,7 +386,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
               )}
             </section>
 
-            {/* PRICING SECTION */}
             {!isSubscribed && (
               <section style={{ textAlign: 'center', marginBottom: '55px' }}>
                 <h2 style={{ fontSize: '1.7rem', fontWeight: '900', marginBottom: '8px' }}>Избери абонаментен план</h2>
@@ -401,7 +393,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '22px' }}>
                   
-                  {/* STARTER */}
                   <div style={{
                     background: 'rgba(20, 27, 45, 0.7)',
                     border: '1px solid #1e293b',
@@ -452,7 +443,6 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
                     </a>
                   </div>
 
-                  {/* PRO */}
                   <div style={{
                     background: 'rgba(20, 27, 45, 0.95)',
                     border: '2px solid #ef4444',
@@ -460,4 +450,13 @@ Structure: 1. HOOK, 2. VISUAL & AUDIO, 3. CALL TO ACTION.`;
                     padding: '30px 24px',
                     textAlign: 'left',
                     display: 'flex',
-                 
+                    flexDirection: 'column',
+                    justify: 'space-between',
+                    position: 'relative',
+                    boxShadow: '0 0 35px rgba(239, 68, 68, 0.2)'
+                  }}>
+                    <div style={{
+                      position: 'absolute',
+                      top: '-12px',
+                      right: '20px',
+                      back
