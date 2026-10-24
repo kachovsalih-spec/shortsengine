@@ -2,35 +2,42 @@
 
 export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK }) {
   return (
-    <section id="pricing-section" style={{ textAlign: 'center', marginBottom: '60px', padding: '20px 0' }}>
+    <section id="pricing-section" style={{ textAlign: 'center', marginBottom: '60px', padding: '30px 0' }}>
       <div style={{
-        background: 'rgba(220, 38, 38, 0.1)',
-        border: '1px solid rgba(220, 38, 38, 0.3)',
-        borderRadius: '16px',
-        padding: '20px',
-        marginBottom: '30px',
-        maxWidth: '600px',
-        margin: '0 auto 30px auto'
+        background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(15, 23, 42, 0.8))',
+        border: '1px solid rgba(220, 38, 38, 0.4)',
+        borderRadius: '20px',
+        padding: '24px',
+        marginBottom: '35px',
+        maxWidth: '650px',
+        margin: '0 auto 35px auto',
+        boxShadow: '0 0 30px rgba(220, 38, 38, 0.2)'
       }}>
-        <h3 style={{ color: '#f87171', fontSize: '1.2rem', fontWeight: 800, marginBottom: '6px' }}>⚡ Изчерпахте безплатните си опити!</h3>
-        <p style={{ color: '#cbd5e1', fontSize: '0.9rem', margin: 0 }}>Отключете неограничени генерации и завладейте алгоритъма още днес.</p>
+        <h3 style={{ color: '#f87171', fontSize: '1.3rem', fontWeight: 900, marginBottom: '8px' }}>⚡ Безплатните опити свършиха!</h3>
+        <p style={{ color: '#f1f5f9', fontSize: '0.95rem', margin: 0, fontWeight: '500' }}>Отключи неограничена мощ и започни да трупаш милиони гледания още днес.</p>
       </div>
 
-      <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '10px', color: '#fff' }}>Избери своя план за растеж</h2>
-      <p style={{ color: '#94a3b8', marginBottom: '35px', fontSize: '1rem' }}>Инвестирай в съдържание, което носещи реални гледания и клиенти.</p>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: 900, marginBottom: '12px', color: '#fff', letterSpacing: '-0.02em' }}>
+        Готов ли си да станеш следващият вирален хит? 🚀
+      </h2>
+      <p style={{ color: '#94a3b8', marginBottom: '40px', fontSize: '1.05rem' }}>
+        Избери план, създаден за създатели, които не правят компромиси с успеха.
+      </p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
         
         {/* STARTER */}
         <div style={{
-          background: 'rgba(15, 23, 42, 0.7)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'rgba(15, 23, 42, 0.75)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
           borderRadius: '24px',
           padding: '32px',
           textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
-          justify: 'space-between'
+          justify: 'space-between',
+          transition: 'transform 0.3s ease'
         }}>
           <div>
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', margin: 0 }}>Starter</h3>
@@ -67,7 +74,8 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
 
         {/* PRO */}
         <div style={{
-          background: 'rgba(220, 38, 38, 0.08)',
+          background: 'linear-gradient(145deg, rgba(220, 38, 38, 0.08), rgba(15, 23, 42, 0.85))',
+          backdropFilter: 'blur(12px)',
           border: '2px solid #ef4444',
           borderRadius: '24px',
           padding: '32px',
@@ -76,7 +84,7 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
           flexDirection: 'column',
           justify: 'space-between',
           position: 'relative',
-          boxShadow: '0 0 50px rgba(220, 38, 38, 0.2)'
+          boxShadow: '0 0 50px rgba(220, 38, 38, 0.25)'
         }}>
           <div style={{
             position: 'absolute',
@@ -88,9 +96,10 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
             fontWeight: 900,
             padding: '5px 14px',
             borderRadius: '50px',
-            letterSpacing: '0.5px'
+            letterSpacing: '0.5px',
+            boxShadow: '0 5px 15px rgba(239, 68, 68, 0.4)'
           }}>
-            НАЙ-ПОПУЛЯРЕН 🔥
+            ХИТ 🔥 ИЗБОР
           </div>
 
           <div>
@@ -119,7 +128,7 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
               borderRadius: '12px',
               fontWeight: '800',
               fontSize: '0.95rem',
-              boxShadow: '0 10px 25px -5px rgba(220, 38, 38, 0.5)'
+              boxShadow: '0 10px 25px rgba(220, 38, 38, 0.5)'
             }}
           >
             Вземи Pro Неограничен 🚀
