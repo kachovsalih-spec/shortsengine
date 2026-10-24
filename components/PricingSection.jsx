@@ -2,15 +2,28 @@
 
 export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK }) {
   return (
-    <section style={{ textAlign: 'center', marginBottom: '60px' }}>
-      <h2 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '8px', color: '#fff' }}>Избери план за пълен достъп</h2>
-      <p style={{ color: '#94a3b8', marginBottom: '32px', fontSize: '0.95rem' }}>Отключете потенциала на вашите социални мрежи.</p>
+    <section id="pricing-section" style={{ textAlign: 'center', marginBottom: '60px', padding: '20px 0' }}>
+      <div style={{
+        background: 'rgba(220, 38, 38, 0.1)',
+        border: '1px solid rgba(220, 38, 38, 0.3)',
+        borderRadius: '16px',
+        padding: '20px',
+        marginBottom: '30px',
+        maxWidth: '600px',
+        margin: '0 auto 30px auto'
+      }}>
+        <h3 style={{ color: '#f87171', fontSize: '1.2rem', fontWeight: 800, marginBottom: '6px' }}>⚡ Изчерпахте безплатните си опити!</h3>
+        <p style={{ color: '#cbd5e1', fontSize: '0.9rem', margin: 0 }}>Отключете неограничени генерации и завладейте алгоритъма още днес.</p>
+      </div>
+
+      <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '10px', color: '#fff' }}>Избери своя план за растеж</h2>
+      <p style={{ color: '#94a3b8', marginBottom: '35px', fontSize: '1rem' }}>Инвестирай в съдържание, което носещи реални гледания и клиенти.</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
         
-        {/* STARTER PLAN */}
+        {/* STARTER */}
         <div style={{
-          background: 'rgba(15, 23, 42, 0.6)',
+          background: 'rgba(15, 23, 42, 0.7)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
           borderRadius: '24px',
           padding: '32px',
@@ -20,16 +33,15 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
           justify: 'space-between'
         }}>
           <div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', margin: 0 }}>Starter</h3>
-            <div style={{ fontSize: '2.2rem', fontWeight: 900, margin: '16px 0', color: '#fff' }}>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', margin: 0 }}>Starter</h3>
+            <div style={{ fontSize: '2.4rem', fontWeight: 900, margin: '16px 0', color: '#fff' }}>
               €19.99 <span style={{ fontSize: '0.9rem', color: '#94a3b8', fontWeight: '400' }}>/мес</span>
             </div>
-            <ul style={{ listStyle: 'none', margin: '24px 0', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem', color: '#cbd5e1' }}>
+            <ul style={{ listStyle: 'none', margin: '24px 0', padding: 0, display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.92rem', color: '#cbd5e1' }}>
               <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> <strong>50 AI скрипта</strong> на месец</li>
-              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> TikTok, Reels & Shorts формати</li>
-              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Грабващи кукички (Viral Hooks)</li>
-              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Визуални и звукови директиви</li>
-              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Български & Английски език</li>
+              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> TikTok, Reels & Shorts</li>
+              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Вирусни кукички (Viral Hooks)</li>
+              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Български и Английски език</li>
             </ul>
           </div>
           <a
@@ -38,24 +50,24 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
             rel="noopener noreferrer"
             style={{
               display: 'block',
-              padding: '14px',
+              padding: '16px',
               background: '#1e293b',
               color: '#fff',
               textDecoration: 'none',
               textAlign: 'center',
               borderRadius: '12px',
               fontWeight: '800',
-              fontSize: '0.92rem',
-              border: '1px solid rgba(255,255,255,0.1)'
+              fontSize: '0.95rem',
+              border: '1px solid rgba(255,255,255,0.15)'
             }}
           >
             Купи Starter 💳
           </a>
         </div>
 
-        {/* PRO PLAN */}
+        {/* PRO */}
         <div style={{
-          background: 'rgba(220, 38, 38, 0.05)',
+          background: 'rgba(220, 38, 38, 0.08)',
           border: '2px solid #ef4444',
           borderRadius: '24px',
           padding: '32px',
@@ -64,7 +76,7 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
           flexDirection: 'column',
           justify: 'space-between',
           position: 'relative',
-          boxShadow: '0 0 40px rgba(220, 38, 38, 0.15)'
+          boxShadow: '0 0 50px rgba(220, 38, 38, 0.2)'
         }}>
           <div style={{
             position: 'absolute',
@@ -74,23 +86,22 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
             color: '#fff',
             fontSize: '0.75rem',
             fontWeight: 900,
-            padding: '4px 14px',
+            padding: '5px 14px',
             borderRadius: '50px',
             letterSpacing: '0.5px'
           }}>
-            ПРЕПОРЪЧАН 🔥
+            НАЙ-ПОПУЛЯРЕН 🔥
           </div>
 
           <div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', margin: 0 }}>Pro</h3>
-            <div style={{ fontSize: '2.2rem', fontWeight: 900, margin: '16px 0', color: '#fff' }}>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', margin: 0 }}>Pro Неограничен</h3>
+            <div style={{ fontSize: '2.4rem', fontWeight: 900, margin: '16px 0', color: '#fff' }}>
               €39.99 <span style={{ fontSize: '0.9rem', color: '#94a3b8', fontWeight: '400' }}>/мес</span>
             </div>
-            <ul style={{ listStyle: 'none', margin: '24px 0', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem', color: '#f1f5f9' }}>
+            <ul style={{ listStyle: 'none', margin: '24px 0', padding: 0, display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.92rem', color: '#f1f5f9' }}>
               <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> <strong>Неограничени AI скриптове</strong></li>
-              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Достъп до всички бъдещи ъпдейти</li>
               <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Приоритетна супер-бърза генерация</li>
-              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Пълен Търговски Лиценз (за клиенти)</li>
+              <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Пълен Търговски Лиценз</li>
               <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> VIP Поддръжка 24/7</li>
             </ul>
           </div>
@@ -100,15 +111,15 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
             rel="noopener noreferrer"
             style={{
               display: 'block',
-              padding: '14px',
+              padding: '16px',
               background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
               color: '#fff',
               textDecoration: 'none',
               textAlign: 'center',
               borderRadius: '12px',
               fontWeight: '800',
-              fontSize: '0.92rem',
-              boxShadow: '0 10px 25px -5px rgba(220, 38, 38, 0.4)'
+              fontSize: '0.95rem',
+              boxShadow: '0 10px 25px -5px rgba(220, 38, 38, 0.5)'
             }}
           >
             Вземи Pro Неограничен 🚀
