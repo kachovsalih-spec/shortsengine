@@ -198,7 +198,6 @@ Structure:
       
       <div style={{ maxWidth: '680px', margin: '0 auto' }}>
 
-        {/* HEADER */}
         <header style={{ textAlign: 'center', marginBottom: '35px' }}>
           <div style={{
             display: 'inline-block',
@@ -234,7 +233,6 @@ Structure:
           </p>
         </header>
 
-        {/* ФОРМА ЗА ВХОД ЧРЕЗ ИМЕЙЛ */}
         {!isLoggedIn ? (
           <section style={{
             background: '#0a0a0a',
@@ -293,7 +291,6 @@ Structure:
           </section>
         ) : (
           <>
-            {/* БАНЕР ЗА АКТИВЕН АБОНАМЕНТ */}
             {isSubscribed && (
               <div style={{
                 background: 'rgba(34, 197, 94, 0.1)',
@@ -311,7 +308,6 @@ Structure:
               </div>
             )}
 
-            {/* ГЕНЕРАТОР КАРТА */}
             <section style={{
               background: '#0a0a0a',
               border: '1px solid #27272a',
@@ -321,10 +317,9 @@ Structure:
               marginBottom: '35px'
             }}>
               
-              {/* ХЕДЪР НА ПРОФИЛА И БРОЯЧ */}
               <div style={{
                 display: 'flex',
-                justify: 'space-between',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '20px',
                 paddingBottom: '14px',
@@ -366,7 +361,6 @@ Structure:
                 </div>
               </div>
               
-              {/* ФОРМА ЗА ГЕНЕРИРАНЕ */}
               <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px' }}>
                   <div>
@@ -429,7 +423,6 @@ Structure:
 
               {error && <p style={{ color: '#f87171', fontSize: '0.85rem', marginTop: '14px', textAlign: 'center' }}>⚠️ {error}</p>}
 
-              {/* РЕЗУЛТАТ */}
               {result && (
                 <div style={{ marginTop: '24px', padding: '18px', background: '#000', border: '1px solid #dc2626', borderRadius: '12px', boxShadow: '0 0 20px rgba(220, 38, 38, 0.15)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
@@ -446,7 +439,6 @@ Structure:
               )}
             </section>
 
-            {/* СЕКЦИЯ С ЦЕНИТЕ (ПЛАНОВЕ С ПЪЛНО ОПИСАНИЕ И STRIPE ЛИНКОВЕ) */}
             {!isSubscribed && (
               <section id="pricing" style={{ textAlign: 'center', marginBottom: '50px' }}>
                 <h2 style={{ fontSize: '1.6rem', fontWeight: '900', marginBottom: '8px' }}>Избери план за пълен достъп</h2>
@@ -454,7 +446,6 @@ Structure:
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
                   
-                  {/* STARTER PLAN */}
                   <div style={{
                     background: '#0a0a0a',
                     border: '1px solid #27272a',
@@ -469,4 +460,8 @@ Structure:
                     <div>
                       <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#a1a1aa', textTransform: 'uppercase' }}>За създатели</div>
                       <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#fff', margin: '4px 0 12px 0' }}>Starter</h3>
-                      <div style={{
+                      <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#fff', marginBottom: '16px' }}>
+                        €19.99 <span style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: '500' }}>/месец</span>
+                      </div>
+                      
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: '#a1a1aa', fontSize: '0.85rem', display: 'f
