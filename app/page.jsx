@@ -268,8 +268,7 @@ Structure:
                   fontSize: '0.95rem',
                   outline: 'none',
                   boxSizing: 'border-box',
-                  textAlign: 'center',
-                  transition: 'border 0.2s'
+                  textAlign: 'center'
                 }}
               />
               <button
@@ -284,8 +283,7 @@ Structure:
                   fontSize: '0.98rem',
                   fontWeight: '800',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 20px rgba(220, 38, 38, 0.4)',
-                  transition: 'transform 0.1s, opacity 0.2s'
+                  boxShadow: '0 4px 20px rgba(220, 38, 38, 0.4)'
                 }}
               >
                 {loading ? 'Зареждане...' : 'Продължи към Генератора 🚀'}
@@ -338,7 +336,6 @@ Structure:
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  {/* Брояч за опитите */}
                   <div style={{
                     background: isSubscribed || generationsLeft > 0 ? 'rgba(220, 38, 38, 0.15)' : 'rgba(39, 39, 42, 0.8)',
                     border: isSubscribed || generationsLeft > 0 ? '1px solid rgba(220, 38, 38, 0.4)' : '1px solid #3f3f46',
@@ -351,7 +348,6 @@ Structure:
                     {isSubscribed ? '✨ Неограничен' : `📊 Остават: ${generationsLeft} ${generationsLeft === 1 ? 'опит' : 'опита'}`}
                   </div>
 
-                  {/* Бутон за Изход */}
                   <button
                     onClick={handleLogout}
                     title="Изход от акаунта"
@@ -471,4 +467,6 @@ Structure:
                     boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
                   }}>
                     <div>
-                      <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#a1a1aa', textTransform: 'upper
+                      <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#a1a1aa', textTransform: 'uppercase' }}>За създатели</div>
+                      <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#fff', margin: '4px 0 12px 0' }}>Starter</h3>
+                      <div style={{
