@@ -11,17 +11,29 @@ export default function Home() {
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
   
-  // Проверка за използвани безплатни опити
+  // 1 безплатен опит по подразбиране
   const [generationsLeft, setGenerationsLeft] = useState(1);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
-  // Твоите Stripe Payment Links
+  // Твоите реални Stripe линкове
   const STRIPE_STARTER_LINK = "https://buy.stripe.com/3cI9AU3HvfAs89W6TI67S01";
   const STRIPE_PRO_LINK = "https://buy.stripe.com/5kQaEY6THag875Sa5U67S00";
 
   useEffect(() => {
-    const savedUsage = localStorage.getItem('shortsEngine_used');
-    if (savedUsage) {
+    // Проверяваме дали потребителят се връща успешно от Stripe плащане
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentStatus = urlParams.get('payment');
+
+    if (paymentStatus === 'success') {
+      setIsSubscribed(true);
+      setGenerationsLeft(999);
+      localStorage.setItem('shortsEngine_subscribed', 'true');
+      localStorage.removeItem('shortsEngine_used');
+    } else if (localStorage.getItem('shortsEngine_subscribed') === 'true') {
+      setIsSubscribed(true);
+      setGenerationsLeft(999);
+    } else if (localStorage.getItem('shortsEngine_used') === 'true') {
       setGenerationsLeft(0);
     }
   }, []);
@@ -29,8 +41,8 @@ export default function Home() {
   const handleGenerate = async (e) => {
     e.preventDefault();
 
-    if (generationsLeft <= 0) {
-      setError('Вие използвахте вашия безплатен опит! Изберете абонаментен план по-долу, за да продължите.');
+    if (generationsLeft <= 0 && !isSubscribed) {
+      setError('Вие използвахте вашия безплатен опит! Изберете абонаментен план по-долу, за да отключите неограничени генерации.');
       return;
     }
 
@@ -60,8 +72,12 @@ Include:
       }
 
       setResult(data.data);
-      setGenerationsLeft(0);
-      localStorage.setItem('shortsEngine_used', 'true');
+      
+      // Ако не е абониран, изхабяваме безплатния опит
+      if (!isSubscribed) {
+        setGenerationsLeft(0);
+        localStorage.setItem('shortsEngine_used', 'true');
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -79,8 +95,8 @@ Include:
       a: "Да! Поддържаме както Английски за международна аудитория, така и Български език."
     },
     {
-      q: "Как да отключа неограничен достъп?",
-      a: "Изберете план Starter (€19.99) или Pro (€39.99) от картата по-долу. След успешно плащане получавате незабавен достъп."
+      q: "Как се активира достъпът след плащане?",
+      a: "След като завършите плащането в Stripe, ще бъдете върнати автоматично на сайта и вашият акаунт ще получи неограничен достъп."
     }
   ];
 
@@ -132,6 +148,24 @@ Include:
           </p>
         </header>
 
+        {/* Успешно съобщение при плащане */}
+        {isSubscribed && (
+          <div style={{
+            background: 'rgba(34, 197, 94, 0.15)',
+            border: '1px solid rgba(34, 197, 94, 0.4)',
+            borderRadius: '16px',
+            padding: '20px',
+            textAlign: 'center',
+            marginBottom: '30px',
+            color: '#4ade80'
+          }}>
+            <h3 style={{ margin: '0 0 6px 0', fontSize: '1.2rem' }}>🎉 Плащането е успешно!</h3>
+            <p style={{ margin: 0, fontSize: '0.95rem', color: '#cbd5e1' }}>
+              Вашият абонамент е активен. Имате неограничен достъп до генератора на скриптове!
+            </p>
+          </div>
+        )}
+
         {/* Generator Card */}
         <section style={{
           background: 'rgba(15, 23, 42, 0.75)',
@@ -147,15 +181,15 @@ Include:
               🚀 Генератор на Скриптове
             </h2>
             <span style={{
-              background: generationsLeft > 0 ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)',
-              border: generationsLeft > 0 ? '1px solid rgba(34, 197, 94, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)',
-              color: generationsLeft > 0 ? '#4ade80' : '#f87171',
+              background: isSubscribed ? 'rgba(34, 197, 94, 0.15)' : (generationsLeft > 0 ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)'),
+              border: isSubscribed ? '1px solid rgba(34, 197, 94, 0.3)' : (generationsLeft > 0 ? '1px solid rgba(34, 197, 94, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)'),
+              color: isSubscribed ? '#4ade80' : (generationsLeft > 0 ? '#4ade80' : '#f87171'),
               fontSize: '0.8rem',
               fontWeight: '700',
               padding: '4px 12px',
               borderRadius: '20px'
             }}>
-              {generationsLeft > 0 ? '1 Безплатен Опит' : 'Заключен (0 Опита)'}
+              {isSubscribed ? '✨ PRO Неограничен Достъп' : (generationsLeft > 0 ? '1 Безплатен Опит' : 'Заключен')}
             </span>
           </div>
           
@@ -231,7 +265,7 @@ Include:
               disabled={loading}
               style={{
                 padding: '14px',
-                background: loading ? '#475569' : (generationsLeft > 0 ? 'linear-gradient(90deg, #6366f1 0%, #a855f7 100%)' : '#334155'),
+                background: loading ? '#475569' : (generationsLeft > 0 || isSubscribed ? 'linear-gradient(90deg, #6366f1 0%, #a855f7 100%)' : '#334155'),
                 color: '#fff',
                 border: 'none',
                 borderRadius: '10px',
@@ -240,7 +274,7 @@ Include:
                 cursor: loading ? 'not-allowed' : 'pointer'
               }}
             >
-              {loading ? 'Генериране на скрипт...' : (generationsLeft > 0 ? '🔥 Генерирай Скрипт (Безплатно)' : '🔒 Абонирай се за отключване')}
+              {loading ? 'Генериране на скрипт...' : (generationsLeft > 0 || isSubscribed ? '🔥 Генерирай Скрипт' : '🔒 Абонирай се за отключване')}
             </button>
           </form>
 
