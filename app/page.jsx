@@ -77,7 +77,7 @@ export default function Home() {
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: `Create a viral short script for ${platform}: ${prompt}. Style: ${tone}. Language: ${language}.` }),
+        body: JSON.stringify({ prompt: `Create a professional and high-performing short script for ${platform}: ${prompt}. Style: ${tone}. Language: ${language}.` }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Грешка при генерация.');
@@ -92,7 +92,7 @@ export default function Home() {
   };
 
   const faqs = [
-    { q: "Как работи ShortsEngine AI?", a: "Изкуственият интелект анализира трендовете и генерира готови за запис скриптове с мощни кукички (hooks), които задържат вниманието до последната секунда." },
+    { q: "Как работи ShortsEngine AI?", a: "Изкуственият интелект анализира успешните практики и генерира готови за запис скриптове с мощни кукички (hooks), които задържат вниманието до последната секунда." },
     { q: "Защо се изисква имейл адрес?", a: "Имейлът е необходим за сигурността на вашия профил и за автоматично проследяване на вашите генерации в реално време." },
     { q: "Мога ли да се откажа по всяко време?", a: "Да! Абонаментите се управляват през Stripe и могат да бъдат спрени с един клик без никакви скрити такси." }
   ];
@@ -125,7 +125,7 @@ export default function Home() {
             boxShadow: '0 0 25px rgba(220, 38, 38, 0.25)',
             marginBottom: '18px'
           }}>
-            ⚡ AI MACHINE FOR VIRAL GROWTH
+            ⚡ AI ENGINE FOR CONTENT CREATORS
           </div>
           <h1 style={{
             fontSize: '3rem',
@@ -136,10 +136,10 @@ export default function Home() {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>
-            Създавай видеа, които чупят алгоритъма
+            Създавай хитови видеа за секунди
           </h1>
           <p style={{ color: '#94a3b8', fontSize: '1.1rem', margin: 0, fontWeight: '500', lineHeight: '1.5' }}>
-            Превърни обикновена идея в пристрастяващ скрипт за TikTok, Reels и Shorts само с един клик.
+            Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
         </header>
 
@@ -157,7 +157,7 @@ export default function Home() {
             boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7)'
           }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '8px', color: '#fff' }}>Започни напълно безплатно</h2>
-            <p style={{ color: '#94a3b8', fontSize: '0.92rem', marginBottom: '28px' }}>Въведи своя имейл, за да отключиш първия си вирален скрипт.</p>
+            <p style={{ color: '#94a3b8', fontSize: '0.92rem', marginBottom: '28px' }}>Въведи своя имейл, за да отключиш първия си скрипт.</p>
             <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <input
                 type="email"
@@ -364,7 +364,7 @@ export default function Home() {
                     boxShadow: '0 12px 30px rgba(220, 38, 38, 0.45)'
                   }}
                 >
-                  {loading ? 'AI генерира твоя хит...' : '🔥 Генерирай Вирален Скрипт'}
+                  {loading ? 'AI генерира твоя скрипт...' : '🔥 Генерирай Скрипт'}
                 </button>
               </form>
 
