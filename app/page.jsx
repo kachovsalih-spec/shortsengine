@@ -103,42 +103,42 @@ export default function Home() {
       backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.22) 0%, transparent 55%), radial-gradient(circle at 10% 90%, rgba(30, 41, 59, 0.6) 0%, transparent 40%)',
       color: '#f1f5f9',
       minHeight: '100vh',
-      padding: '60px 20px',
+      padding: '30px 14px',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <div style={{ maxWidth: '820px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '780px', margin: '0 auto' }}>
         
         {/* HEADER */}
-        <header style={{ textAlign: 'center', marginBottom: '50px' }}>
+        <header style={{ textAlign: 'center', marginBottom: '35px' }}>
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '8px',
-            padding: '6px 18px',
+            gap: '6px',
+            padding: '5px 14px',
             background: 'rgba(220, 38, 38, 0.15)',
             border: '1px solid rgba(220, 38, 38, 0.4)',
             borderRadius: '50px',
             color: '#f87171',
-            fontSize: '0.85rem',
+            fontSize: '0.78rem',
             fontWeight: '800',
             letterSpacing: '0.8px',
-            boxShadow: '0 0 25px rgba(220, 38, 38, 0.25)',
-            marginBottom: '18px'
+            boxShadow: '0 0 20px rgba(220, 38, 38, 0.2)',
+            marginBottom: '14px'
           }}>
             ⚡ AI ENGINE FOR CONTENT CREATORS
           </div>
           <h1 style={{
-            fontSize: '3rem',
+            fontSize: 'clamp(2rem, 5vw, 2.6rem)',
             fontWeight: '900',
-            letterSpacing: '-0.04em',
-            margin: '0 0 14px 0',
+            letterSpacing: '-0.03em',
+            margin: '0 0 10px 0',
             background: 'linear-gradient(180deg, #ffffff 30%, #94a3b8 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>
             Създавай хитови видеа за секунди
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '1.1rem', margin: 0, fontWeight: '500', lineHeight: '1.5' }}>
+          <p style={{ color: '#94a3b8', fontSize: '0.98rem', margin: 0, fontWeight: '500', lineHeight: '1.4' }}>
             Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
         </header>
@@ -149,16 +149,16 @@ export default function Home() {
             background: 'rgba(15, 23, 42, 0.75)',
             backdropFilter: 'blur(16px)',
             border: '1px solid rgba(220, 38, 38, 0.35)',
-            borderRadius: '28px',
-            padding: '40px 32px',
+            borderRadius: '22px',
+            padding: '28px 20px',
             textAlign: 'center',
-            maxWidth: '480px',
+            maxWidth: '440px',
             margin: '0 auto',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7)'
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)'
           }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '8px', color: '#fff' }}>Започни напълно безплатно</h2>
-            <p style={{ color: '#94a3b8', fontSize: '0.92rem', marginBottom: '28px' }}>Въведи своя имейл, за да отключиш първия си скрипт.</p>
-            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h2 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '6px', color: '#fff' }}>Започни напълно безплатно</h2>
+            <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginBottom: '22px' }}>Въведи своя имейл, за да отключиш първия си скрипт.</p>
+            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <input
                 type="email"
                 placeholder="your@email.com"
@@ -167,12 +167,12 @@ export default function Home() {
                 required
                 style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'rgba(4, 6, 11, 0.9)',
                   border: '1px solid rgba(255, 255, 255, 0.15)',
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   color: '#fff',
-                  fontSize: '0.98rem',
+                  fontSize: '0.95rem',
                   textAlign: 'center',
                   outline: 'none',
                   boxSizing: 'border-box'
@@ -183,21 +183,21 @@ export default function Home() {
                 disabled={loading}
                 style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
                   color: '#fff',
                   border: 'none',
-                  borderRadius: '14px',
-                  fontSize: '1rem',
+                  borderRadius: '12px',
+                  fontSize: '0.95rem',
                   fontWeight: '800',
                   cursor: 'pointer',
-                  boxShadow: '0 10px 30px rgba(220, 38, 38, 0.4)'
+                  boxShadow: '0 8px 25px rgba(220, 38, 38, 0.4)'
                 }}
               >
                 {loading ? 'Зареждане...' : 'Влез в системата 🚀'}
               </button>
             </form>
-            {error && <p style={{ color: '#f87171', fontSize: '0.88rem', marginTop: '16px', fontWeight: 600 }}>{error}</p>}
+            {error && <p style={{ color: '#f87171', fontSize: '0.85rem', marginTop: '14px', fontWeight: 600 }}>{error}</p>}
           </div>
         ) : (
           <>
@@ -205,11 +205,12 @@ export default function Home() {
               <div style={{
                 background: 'rgba(34, 197, 94, 0.12)',
                 border: '1px solid rgba(34, 197, 94, 0.35)',
-                borderRadius: '16px',
-                padding: '16px',
+                borderRadius: '14px',
+                padding: '14px',
                 textAlign: 'center',
-                marginBottom: '30px',
+                marginBottom: '24px',
                 color: '#4ade80',
+                fontSize: '0.9rem',
                 fontWeight: 600
               }}>
                 🎉 Активен PRO Абонамент с неограничени възможности! ({email})
@@ -221,25 +222,25 @@ export default function Home() {
               background: 'rgba(15, 23, 42, 0.75)',
               backdropFilter: 'blur(16px)',
               border: '1px solid rgba(255, 255, 255, 0.12)',
-              borderRadius: '28px',
-              padding: '36px',
-              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7)',
-              marginBottom: '50px'
+              borderRadius: '22px',
+              padding: '24px 18px',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)',
+              marginBottom: '35px'
             }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '16px' }}>
-                <span style={{ color: '#cbd5e1', fontWeight: 600, fontSize: '0.92rem' }}>👤 {email}</span>
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '14px', gap: '8px', flexWrap: 'wrap' }}>
+                <span style={{ color: '#cbd5e1', fontWeight: 600, fontSize: '0.88rem', wordBreak: 'break-all' }}>👤 {email}</span>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                   <span style={{
                     display: 'inline-flex',
-                    padding: '6px 14px',
+                    padding: '5px 12px',
                     background: 'rgba(220, 38, 38, 0.15)',
                     border: '1px solid rgba(220, 38, 38, 0.35)',
                     borderRadius: '99px',
                     color: '#f87171',
-                    fontSize: '0.8rem',
+                    fontSize: '0.75rem',
                     fontWeight: '800'
                   }}>
-                    {isSubscribed ? '✨ Неограничен' : `📊 Оставащи опити: ${generationsLeft}`}
+                    {isSubscribed ? '✨ Неограничен' : `📊 Опити: ${generationsLeft}`}
                   </span>
                   <button
                     onClick={handleLogout}
@@ -247,10 +248,10 @@ export default function Home() {
                       background: 'none',
                       border: '1px solid rgba(255,255,255,0.15)',
                       color: '#94a3b8',
-                      padding: '6px 14px',
+                      padding: '5px 10px',
                       borderRadius: '8px',
                       cursor: 'pointer',
-                      fontSize: '0.8rem'
+                      fontSize: '0.78rem'
                     }}
                   >
                     Изход
@@ -258,21 +259,22 @@ export default function Home() {
                 </div>
               </div>
 
-              <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
+              <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* Responsive grid for selectors */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '12px' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', marginBottom: '6px', fontWeight: 700 }}>ПЛАТФОРМА</label>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '5px', fontWeight: 700 }}>ПЛАТФОРМА</label>
                     <select
                       value={platform}
                       onChange={(e) => setPlatform(e.target.value)}
                       style={{
                         width: '100%',
-                        padding: '14px',
+                        padding: '12px',
                         background: '#04060b',
                         border: '1px solid rgba(255, 255, 255, 0.15)',
-                        borderRadius: '12px',
+                        borderRadius: '10px',
                         color: '#fff',
-                        fontSize: '0.92rem',
+                        fontSize: '0.9rem',
                         outline: 'none'
                       }}
                     >
@@ -283,18 +285,18 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', marginBottom: '6px', fontWeight: 700 }}>СТИЛ НА СХЕМАТА</label>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '5px', fontWeight: 700 }}>СТИЛ НА СХЕМАТА</label>
                     <select
                       value={tone}
                       onChange={(e) => setTone(e.target.value)}
                       style={{
                         width: '100%',
-                        padding: '14px',
+                        padding: '12px',
                         background: '#04060b',
                         border: '1px solid rgba(255, 255, 255, 0.15)',
-                        borderRadius: '12px',
+                        borderRadius: '10px',
                         color: '#fff',
-                        fontSize: '0.92rem',
+                        fontSize: '0.9rem',
                         outline: 'none'
                       }}
                     >
@@ -305,18 +307,18 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', marginBottom: '6px', fontWeight: 700 }}>ЕЗИК</label>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '5px', fontWeight: 700 }}>ЕЗИК</label>
                     <select
                       value={language}
                       onChange={(e) => setLanguage(e.target.value)}
                       style={{
                         width: '100%',
-                        padding: '14px',
+                        padding: '12px',
                         background: '#04060b',
                         border: '1px solid rgba(255, 255, 255, 0.15)',
-                        borderRadius: '12px',
+                        borderRadius: '10px',
                         color: '#fff',
-                        fontSize: '0.92rem',
+                        fontSize: '0.9rem',
                         outline: 'none'
                       }}
                     >
@@ -327,7 +329,7 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', marginBottom: '6px', fontWeight: 700 }}>ТЕМА НА ВИДЕОТО ИЛИ ОСНОВНА ИДЕЯ</label>
+                  <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '5px', fontWeight: 700 }}>ТЕМА НА ВИДЕОТО ИЛИ ОСНОВНА ИДЕЯ</label>
                   <textarea
                     rows="3"
                     placeholder="Напр. 3 грешки в тренировките, които спират растежа ти..."
@@ -336,12 +338,12 @@ export default function Home() {
                     required
                     style={{
                       width: '100%',
-                      padding: '16px',
+                      padding: '14px',
                       background: '#04060b',
                       border: '1px solid rgba(255, 255, 255, 0.15)',
-                      borderRadius: '12px',
+                      borderRadius: '10px',
                       color: '#fff',
-                      fontSize: '0.98rem',
+                      fontSize: '0.95rem',
                       outline: 'none',
                       boxSizing: 'border-box'
                     }}
@@ -353,15 +355,15 @@ export default function Home() {
                   disabled={loading}
                   style={{
                     width: '100%',
-                    padding: '18px',
+                    padding: '15px',
                     background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
                     color: '#fff',
                     border: 'none',
-                    borderRadius: '14px',
-                    fontSize: '1.05rem',
+                    borderRadius: '12px',
+                    fontSize: '1rem',
                     fontWeight: '800',
                     cursor: 'pointer',
-                    boxShadow: '0 12px 30px rgba(220, 38, 38, 0.45)'
+                    boxShadow: '0 8px 25px rgba(220, 38, 38, 0.4)'
                   }}
                 >
                   {loading ? 'AI генерира твоя скрипт...' : '🔥 Генерирай Скрипт'}
@@ -369,23 +371,23 @@ export default function Home() {
               </form>
 
               {error && (
-                <div style={{ marginTop: '18px', padding: '14px', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.35)', borderRadius: '10px', color: '#f87171', textAlign: 'center', fontSize: '0.92rem', fontWeight: 600 }}>
+                <div style={{ marginTop: '16px', padding: '12px', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.35)', borderRadius: '10px', color: '#f87171', textAlign: 'center', fontSize: '0.88rem', fontWeight: 600 }}>
                   {error}
                 </div>
               )}
 
               {result && (
-                <div style={{ marginTop: '28px', padding: '28px', background: '#04060b', border: '1px solid #ef4444', borderRadius: '18px', boxShadow: '0 0 35px rgba(239,68,68,0.2)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px', alignItems: 'center' }}>
-                    <strong style={{ color: '#f87171', fontSize: '1.05rem' }}>✨ Вашият готов скрипт:</strong>
+                <div style={{ marginTop: '22px', padding: '20px', background: '#04060b', border: '1px solid #ef4444', borderRadius: '14px', boxShadow: '0 0 25px rgba(239,68,68,0.2)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', alignItems: 'center' }}>
+                    <strong style={{ color: '#f87171', fontSize: '1rem' }}>✨ Вашият готов скрипт:</strong>
                     <button
                       onClick={() => navigator.clipboard.writeText(result)}
-                      style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold' }}
+                      style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)', padding: '5px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 'bold' }}
                     >
                       Копирай 📋
                     </button>
                   </div>
-                  <pre style={{ whiteSpace: 'pre-wrap', color: '#e2e8f0', lineHeight: '1.7', fontFamily: 'inherit', fontSize: '0.95rem', margin: 0 }}>{result}</pre>
+                  <pre style={{ whiteSpace: 'pre-wrap', color: '#e2e8f0', lineHeight: '1.6', fontFamily: 'inherit', fontSize: '0.9rem', margin: 0 }}>{result}</pre>
                 </div>
               )}
             </div>
@@ -396,8 +398,8 @@ export default function Home() {
             )}
 
             {/* FAQ SECTION */}
-            <section style={{ maxWidth: '700px', margin: '0 auto 40px auto' }}>
-              <h3 style={{ textAlign: 'center', marginBottom: '24px', fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
+            <section style={{ maxWidth: '700px', margin: '0 auto 30px auto' }}>
+              <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '1.3rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
               {faqs.map((f, i) => (
                 <div
                   key={i}
@@ -405,24 +407,24 @@ export default function Home() {
                   style={{
                     background: 'rgba(15, 23, 42, 0.6)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '16px',
-                    padding: '18px 22px',
-                    marginBottom: '12px',
+                    borderRadius: '14px',
+                    padding: '16px 18px',
+                    marginBottom: '10px',
                     cursor: 'pointer'
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.95rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
                     <span>{f.q}</span>
-                    <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>{openFaq === i ? '−' : '+'}</span>
+                    <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '−' : '+'}</span>
                   </div>
-                  {openFaq === i && <p style={{ color: '#94a3b8', marginTop: '12px', fontSize: '0.9rem', lineHeight: 1.6, margin: '12px 0 0 0' }}>{f.a}</p>}
+                  {openFaq === i && <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: 1.5, margin: '10px 0 0 0' }}>{f.a}</p>}
                 </div>
               ))}
             </section>
           </>
         )}
 
-        <footer style={{ textAlign: 'center', color: '#64748b', fontSize: '0.8rem', marginTop: '60px' }}>
+        <footer style={{ textAlign: 'center', color: '#64748b', fontSize: '0.78rem', marginTop: '40px' }}>
           © {new Date().getFullYear()} ShortsEngine AI. Всички права са запазени.
         </footer>
       </div>
