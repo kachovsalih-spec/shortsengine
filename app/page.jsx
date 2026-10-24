@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
+import PricingSection from '../components/PricingSection';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -394,47 +395,42 @@ export default function Home() {
               )}
             </div>
 
-            {/* PRICING SECTION */}
+            {/* PRICING SECTION IMPORTED FROM COMPONENT */}
             {!isSubscribed && (
-              <section style={{ textAlign: 'center', marginBottom: '60px' }}>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '8px', color: '#fff' }}>Избери план за пълен достъп</h2>
-                <p style={{ color: '#94a3b8', marginBottom: '32px', fontSize: '0.95rem' }}>Отключете потенциала на вашите социални мрежи.</p>
+              <PricingSection STRIPE_STARTER_LINK={STRIPE_STARTER_LINK} STRIPE_PRO_LINK={STRIPE_PRO_LINK} />
+            )}
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
-                  
-                  {/* STARTER */}
-                  <div style={{
+            {/* FAQ SECTION */}
+            <section style={{ maxWidth: '680px', margin: '0 auto 40px auto' }}>
+              <h3 style={{ textAlign: 'center', marginBottom: '24px', fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
+              {faqs.map((f, i) => (
+                <div
+                  key={i}
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  style={{
                     background: 'rgba(15, 23, 42, 0.6)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '24px',
-                    padding: '32px',
-                    textAlign: 'left',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justify: 'space-between'
-                  }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', margin: 0 }}>Starter</h3>
-                      <div style={{ fontSize: '2.2rem', fontWeight: 900, margin: '16px 0', color: '#fff' }}>
-                        €19.99 <span style={{ fontSize: '0.9rem', color: '#94a3b8', fontWeight: '400' }}>/мес</span>
-                      </div>
-                      <ul style={{ listStyle: 'none', margin: '24px 0', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem', color: '#cbd5e1' }}>
-                        <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> <strong>50 AI скрипта</strong> на месец</li>
-                        <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> TikTok, Reels & Shorts формати</li>
-                        <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Грабващи кукички (Viral Hooks)</li>
-                        <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Визуални и звукови директиви</li>
-                        <li><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Български & Английски език</li>
-                      </ul>
-                    </div>
-                    <a
-                      href={STRIPE_STARTER_LINK}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: 'block',
-                        padding: '14px',
-                        background: '#1e293b',
-                        color: '#fff',
-                        textDecoration: 'none',
-                        textAlign: 'center',
-                        bord
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '16px',
+                    padding: '20px',
+                    marginBottom: '12px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff' }}>
+                    <span>{f.q}</span>
+                    <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>{openFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {openFaq === i && <p style={{ color: '#94a3b8', marginTop: '12px', fontSize: '0.9rem', lineHeight: 1.6, margin: '12px 0 0 0' }}>{f.a}</p>}
+                </div>
+              ))}
+            </section>
+          </>
+        )}
+
+        <footer style={{ textAlign: 'center', color: '#64748b', fontSize: '0.8rem', marginTop: '60px' }}>
+          © {new Date().getFullYear()} ShortsEngine AI. Всички права са запазени.
+        </footer>
+      </div>
+    </div>
+  );
+}
