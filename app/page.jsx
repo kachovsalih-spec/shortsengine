@@ -76,6 +76,14 @@ export default function Home() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('shortsEngine_email');
+    setIsLoggedIn(false);
+    setEmail('');
+    setResult('');
+    setError('');
+  };
+
   const checkUserInDatabase = async (userEmail) => {
     try {
       let { data } = await supabase
@@ -112,7 +120,7 @@ export default function Home() {
     e.preventDefault();
 
     if (generationsLeft <= 0 && !isSubscribed) {
-      setError('Вие изчерпахте вашия безплатен опит! Изберете абонаментен план по-долу.');
+      setError('Изчерпахте вашия безплатен опит! Изберете абонаментен план по-долу, за да продължите.');
       return;
     }
 
@@ -120,13 +128,13 @@ export default function Home() {
     setError('');
     setResult('');
 
-    const fullPrompt = `Create a viral script for ${platform} about: "${prompt}".
+    const fullPrompt = `Create a viral short video script for ${platform} about: "${prompt}".
 Tone of voice: ${tone}.
 Language of the response/script: ${language}.
-Include:
-1. A powerful Hook (first 3 seconds)
-2. Main Content (Visuals + Audio/Voiceover)
-3. Call to Action (CTA) at the end.`;
+Structure:
+1. HOOK (First 3 seconds - high converting engagement)
+2. VISUAL & AUDIO DIRECTIVES (Exact scene descriptions and voiceover script)
+3. CALL TO ACTION (CTA at the end for max retention & followers)`;
 
     try {
       const res = await fetch('/api/generate', {
@@ -138,7 +146,7 @@ Include:
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || 'Възникна грешка при генерацията.');
+        throw new Error(data.error || 'Възникна грешка при генерирането.');
       }
 
       setResult(data.data);
@@ -161,69 +169,86 @@ Include:
   const faqs = [
     {
       q: "Как работи ShortsEngine AI?",
-      a: "Генерира професионални вирални сценарии за TikTok, Instagram Reels и YouTube Shorts с включена кукичка (Hook) и призив към действие (CTA)."
+      a: "ShortsEngine AI използва специално обучен изкуствен интелект за генериране на силно ангажиращи сценарии за TikTok, Instagram Reels и YouTube Shorts. Всеки скрипт съдържа грабваща кукичка (Hook), визуални инструкции и точен апел за действие (CTA)."
     },
     {
-      q: "Защо се изисква имейл?",
-      a: "Имейлът гарантира сигурността на вашия акаунт и защитата на безплатния опит срещу повторни опити."
+      q: "Защо се изисква имейл адрес?",
+      a: "Имейлът гарантира сигурността на вашия профил, следи броя на вашите генерации в реално време и защитава платформата от злоупотреби с безплатния опит."
+    },
+    {
+      q: "Мога ли да се откажа от абонамента си по всяко време?",
+      a: "Да, абсолютно! Абонаментите през Stripe нямат обвързващи договори и можете да ги прекратите с един клик по всяко време."
+    },
+    {
+      q: "Каква е разликата между Starter и Pro плана?",
+      a: "Starter планът ви осигурява 50 AI скрипта на месец, идеално за един акаунт. Pro планът предлага неограничени генерации, приоритетна обработка и е перфектен за създатели с множество профили или агенции."
     }
   ];
 
   return (
     <div style={{
-      background: 'radial-gradient(circle at top, #0f172a 0%, #020617 100%)',
-      color: '#f8fafc',
+      backgroundColor: '#050505',
+      backgroundImage: 'radial-gradient(circle at top, #200505 0%, #050505 80%)',
+      color: '#ffffff',
       minHeight: '100vh',
-      fontFamily: "'Inter', sans-serif",
-      padding: '30px 15px',
+      fontFamily: "'Inter', system-ui, sans-serif",
+      padding: '40px 15px',
       boxSizing: 'border-box'
     }}>
       
-      <div style={{ maxWidth: '650px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '680px', margin: '0 auto' }}>
 
-        <header style={{ textAlign: 'center', marginBottom: '30px' }}>
+        {/* HEADER */}
+        <header style={{ textAlign: 'center', marginBottom: '35px' }}>
           <div style={{
             display: 'inline-block',
-            padding: '5px 14px',
-            background: 'rgba(99, 102, 241, 0.15)',
-            border: '1px solid rgba(99, 102, 241, 0.3)',
+            padding: '6px 16px',
+            background: 'rgba(220, 38, 38, 0.12)',
+            border: '1px solid rgba(220, 38, 38, 0.4)',
             borderRadius: '50px',
-            color: '#818cf8',
-            fontSize: '0.75rem',
-            fontWeight: '700',
-            marginBottom: '12px',
-            textTransform: 'uppercase'
+            color: '#ef4444',
+            fontSize: '0.78rem',
+            fontWeight: '800',
+            marginBottom: '14px',
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
+            boxShadow: '0 0 15px rgba(220, 38, 38, 0.2)'
           }}>
             ⚡ SHORTSENGINE AI
           </div>
 
           <h1 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
+            fontSize: 'clamp(2rem, 5vw, 2.8rem)',
             fontWeight: '900',
             lineHeight: '1.15',
-            background: 'linear-gradient(135deg, #ffffff 0%, #a5f3fc 40%, #c084fc 100%)',
+            background: 'linear-gradient(135deg, #ffffff 30%, #fca5a5 70%, #dc2626 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            margin: '0 0 10px 0'
+            margin: '0 0 12px 0',
+            letterSpacing: '-0.5px'
           }}>
             Генерирай вирални скриптове за секунди
           </h1>
+          <p style={{ color: '#a1a1aa', fontSize: '0.95rem', margin: 0 }}>
+            Автоматизирай съдържанието си за TikTok, Reels & Shorts с изкуствен интелект.
+          </p>
         </header>
 
+        {/* ФОРМА ЗА ВХОД ЧРЕЗ ИМЕЙЛ */}
         {!isLoggedIn ? (
           <section style={{
-            background: 'rgba(15, 23, 42, 0.75)',
-            backdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '16px',
-            padding: '28px',
+            background: '#0a0a0a',
+            border: '1px solid rgba(220, 38, 38, 0.3)',
+            borderRadius: '18px',
+            padding: '32px 24px',
             textAlign: 'center',
-            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.5)',
-            marginBottom: '35px'
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(220, 38, 38, 0.05)',
+            marginBottom: '40px'
           }}>
-            <h2 style={{ fontSize: '1.2rem', marginBottom: '10px', color: '#f8fafc' }}>🔑 Въведете имейл за достъп</h2>
-            <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginBottom: '20px' }}>
-              Въведете своя имейл адрес, за да получите 1 безплатен опит или да влезете в профила си.
+            <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🔑</div>
+            <h2 style={{ fontSize: '1.3rem', fontWeight: '800', marginBottom: '8px', color: '#fff' }}>Въведете имейл за достъп</h2>
+            <p style={{ color: '#71717a', fontSize: '0.88rem', marginBottom: '24px', lineHeight: '1.5' }}>
+              Въведете вашия имейл, за да отключите <strong style={{ color: '#ef4444' }}>1 безплатен опит</strong> или да влезете в активния си профил.
             </p>
 
             <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -233,66 +258,124 @@ Include:
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '8px', background: '#020617', border: '1px solid #334155', color: '#fff', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box', textAlign: 'center' }}
+                style={{
+                  width: '100%',
+                  padding: '14px',
+                  borderRadius: '10px',
+                  background: '#121212',
+                  border: '1px solid #27272a',
+                  color: '#fff',
+                  fontSize: '0.95rem',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                  textAlign: 'center',
+                  transition: 'border 0.2s'
+                }}
               />
               <button
                 type="submit"
                 disabled={loading}
-                style={{ padding: '12px', background: 'linear-gradient(90deg, #6366f1 0%, #a855f7 100%)', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.95rem', fontWeight: '700', cursor: 'pointer' }}
+                style={{
+                  padding: '14px',
+                  background: 'linear-gradient(90deg, #dc2626 0%, #991b1b 100%)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontSize: '0.98rem',
+                  fontWeight: '800',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 20px rgba(220, 38, 38, 0.4)',
+                  transition: 'transform 0.1s, opacity 0.2s'
+                }}
               >
                 {loading ? 'Зареждане...' : 'Продължи към Генератора 🚀'}
               </button>
             </form>
-            {error && <p style={{ color: '#f87171', fontSize: '0.85rem', marginTop: '12px' }}>{error}</p>}
+            {error && <p style={{ color: '#f87171', fontSize: '0.85rem', marginTop: '14px' }}>⚠️ {error}</p>}
           </section>
         ) : (
           <>
+            {/* БАНЕР ЗА АКТИВЕН АБОНАМЕНТ */}
             {isSubscribed && (
               <div style={{
-                background: 'rgba(34, 197, 94, 0.15)',
-                border: '1px solid rgba(34, 197, 94, 0.4)',
+                background: 'rgba(34, 197, 94, 0.1)',
+                border: '1px solid rgba(34, 197, 94, 0.3)',
                 borderRadius: '14px',
                 padding: '16px',
                 textAlign: 'center',
                 marginBottom: '24px',
                 color: '#4ade80'
               }}>
-                <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem' }}>🎉 Активен Абонамент!</h3>
-                <p style={{ margin: 0, fontSize: '0.88rem', color: '#cbd5e1' }}>
-                  Влезли сте като: <strong>{email}</strong>
+                <h3 style={{ margin: '0 0 4px 0', fontSize: '1.05rem', fontWeight: '800' }}>🎉 Активен PRO Абонамент!</h3>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: '#a1a1aa' }}>
+                  Влезли сте като: <strong style={{ color: '#fff' }}>{email}</strong>
                 </p>
               </div>
             )}
 
+            {/* ГЕНЕРАТОР КАРТА */}
             <section style={{
-              background: 'rgba(15, 23, 42, 0.75)',
-              backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '16px',
-              padding: '22px',
-              boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.5)',
+              background: '#0a0a0a',
+              border: '1px solid #27272a',
+              borderRadius: '18px',
+              padding: '24px',
+              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8)',
               marginBottom: '35px'
             }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>👤 {email}</span>
-                <span style={{
-                  background: isSubscribed || generationsLeft > 0 ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)',
-                  border: isSubscribed || generationsLeft > 0 ? '1px solid rgba(34, 197, 94, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)',
-                  color: isSubscribed || generationsLeft > 0 ? '#4ade80' : '#f87171',
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
-                  padding: '3px 10px',
-                  borderRadius: '20px'
-                }}>
-                  {isSubscribed ? '✨ PRO Неограничен' : (generationsLeft > 0 ? '1 Безплатен Опит' : 'Заключен')}
-                </span>
+              
+              {/* ХЕДЪР НА ПРОФИЛА И БРОЯЧ */}
+              <div style={{
+                display: 'flex',
+                justify: 'space-between',
+                alignItems: 'center',
+                marginBottom: '20px',
+                paddingBottom: '14px',
+                borderBottom: '1px solid #18181b'
+              }}>
+                <div>
+                  <span style={{ fontSize: '0.82rem', color: '#71717a', display: 'block' }}>Профил:</span>
+                  <span style={{ fontSize: '0.9rem', color: '#f4f4f5', fontWeight: '600' }}>{email}</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {/* Брояч за опитите */}
+                  <div style={{
+                    background: isSubscribed || generationsLeft > 0 ? 'rgba(220, 38, 38, 0.15)' : 'rgba(39, 39, 42, 0.8)',
+                    border: isSubscribed || generationsLeft > 0 ? '1px solid rgba(220, 38, 38, 0.4)' : '1px solid #3f3f46',
+                    padding: '6px 12px',
+                    borderRadius: '30px',
+                    fontSize: '0.78rem',
+                    fontWeight: '800',
+                    color: isSubscribed ? '#4ade80' : (generationsLeft > 0 ? '#ef4444' : '#a1a1aa')
+                  }}>
+                    {isSubscribed ? '✨ Неограничен' : `📊 Остават: ${generationsLeft} ${generationsLeft === 1 ? 'опит' : 'опита'}`}
+                  </div>
+
+                  {/* Бутон за Изход */}
+                  <button
+                    onClick={handleLogout}
+                    title="Изход от акаунта"
+                    style={{
+                      background: '#18181b',
+                      border: '1px solid #27272a',
+                      color: '#a1a1aa',
+                      padding: '6px 10px',
+                      borderRadius: '8px',
+                      fontSize: '0.75rem',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Изход 🚪
+                  </button>
+                </div>
               </div>
               
-              <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '10px' }}>
+              {/* ФОРМА ЗА ГЕНЕРИРАНЕ */}
+              <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px' }}>
                   <div>
-                    <label style={{ display: 'block', marginBottom: '4px', color: '#cbd5e1', fontSize: '0.8rem', fontWeight: '600' }}>Платформа</label>
-                    <select value={platform} onChange={(e) => setPlatform(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', background: '#020617', border: '1px solid #334155', color: '#fff', fontSize: '0.88rem' }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#a1a1aa', fontSize: '0.8rem', fontWeight: '700' }}>Платформа</label>
+                    <select value={platform} onChange={(e) => setPlatform(e.target.value)} style={{ width: '100%', padding: '11px', borderRadius: '8px', background: '#121212', border: '1px solid #27272a', color: '#fff', fontSize: '0.88rem', outline: 'none' }}>
                       <option value="TikTok">TikTok Short</option>
                       <option value="Instagram Reels">Instagram Reels</option>
                       <option value="YouTube Shorts">YouTube Shorts</option>
@@ -300,8 +383,8 @@ Include:
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', marginBottom: '4px', color: '#cbd5e1', fontSize: '0.8rem', fontWeight: '600' }}>Тоналност</label>
-                    <select value={tone} onChange={(e) => setTone(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', background: '#020617', border: '1px solid #334155', color: '#fff', fontSize: '0.88rem' }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#a1a1aa', fontSize: '0.8rem', fontWeight: '700' }}>Тоналност</label>
+                    <select value={tone} onChange={(e) => setTone(e.target.value)} style={{ width: '100%', padding: '11px', borderRadius: '8px', background: '#121212', border: '1px solid #27272a', color: '#fff', fontSize: '0.88rem', outline: 'none' }}>
                       <option value="Атрактивен / Вирален">Атрактивен / Вирален</option>
                       <option value="Образователен">Образователен</option>
                       <option value="Продажбен / Бизнес">Продажбен / Бизнес</option>
@@ -309,8 +392,8 @@ Include:
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', marginBottom: '4px', color: '#cbd5e1', fontSize: '0.8rem', fontWeight: '600' }}>Език</label>
-                    <select value={language} onChange={(e) => setLanguage(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', background: '#020617', border: '1px solid #334155', color: '#fff', fontSize: '0.88rem' }}>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#a1a1aa', fontSize: '0.8rem', fontWeight: '700' }}>Език</label>
+                    <select value={language} onChange={(e) => setLanguage(e.target.value)} style={{ width: '100%', padding: '11px', borderRadius: '8px', background: '#121212', border: '1px solid #27272a', color: '#fff', fontSize: '0.88rem', outline: 'none' }}>
                       <option value="English">English 🇬🇧 / 🇺🇸</option>
                       <option value="Български">Български 🇧🇬</option>
                     </select>
@@ -318,55 +401,74 @@ Include:
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '4px', color: '#cbd5e1', fontSize: '0.8rem', fontWeight: '600' }}>За какво се отнася видеото?</label>
-                  <textarea rows="3" placeholder="Напр. 3 грешки при започване на бизнес..." value={prompt} onChange={(e) => setPrompt(e.target.value)} required style={{ width: '100%', padding: '12px', borderRadius: '8px', background: '#020617', border: '1px solid #334155', color: '#fff', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#a1a1aa', fontSize: '0.8rem', fontWeight: '700' }}>Тема на видеото</label>
+                  <textarea
+                    rows="3"
+                    placeholder="Напр. 3 бързи съвета за фитнес възстановяване..."
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    required
+                    style={{ width: '100%', padding: '12px', borderRadius: '8px', background: '#121212', border: '1px solid #27272a', color: '#fff', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }}
+                  />
                 </div>
 
-                <button type="submit" disabled={loading} style={{ padding: '12px', background: loading ? '#475569' : (generationsLeft > 0 || isSubscribed ? 'linear-gradient(90deg, #6366f1 0%, #a855f7 100%)' : '#334155'), color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.95rem', fontWeight: '700', cursor: 'pointer' }}>
-                  {loading ? 'Генериране...' : (generationsLeft > 0 || isSubscribed ? '🔥 Генерирай Скрипт' : '🔒 Изчерпан опит - Абонирай се')}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  style={{
+                    padding: '14px',
+                    background: loading ? '#27272a' : (generationsLeft > 0 || isSubscribed ? 'linear-gradient(90deg, #dc2626 0%, #991b1b 100%)' : '#18181b'),
+                    color: loading ? '#71717a' : (generationsLeft > 0 || isSubscribed ? '#fff' : '#71717a'),
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontSize: '0.98rem',
+                    fontWeight: '800',
+                    cursor: (generationsLeft > 0 || isSubscribed) ? 'pointer' : 'not-allowed',
+                    boxShadow: (generationsLeft > 0 || isSubscribed) ? '0 4px 15px rgba(220, 38, 38, 0.3)' : 'none'
+                  }}
+                >
+                  {loading ? 'Генериране на AI Скрипт...' : (generationsLeft > 0 || isSubscribed ? '🔥 Генерирай Скрипт' : '🔒 Изчерпан опит - Изберете План')}
                 </button>
               </form>
 
-              {error && <p style={{ color: '#fca5a5', fontSize: '0.85rem', marginTop: '12px', textAlign: 'center' }}>⚠️ {error}</p>}
+              {error && <p style={{ color: '#f87171', fontSize: '0.85rem', marginTop: '14px', textAlign: 'center' }}>⚠️ {error}</p>}
 
+              {/* РЕЗУЛТАТ */}
               {result && (
-                <div style={{ marginTop: '20px', padding: '16px', background: '#020617', border: '1px solid #6366f1', borderRadius: '12px' }}>
-                  <h3 style={{ margin: '0 0 10px 0', color: '#818cf8', fontSize: '1rem' }}>✨ Твоят генериран скрипт:</h3>
-                  <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontFamily: 'inherit', color: '#e2e8f0', fontSize: '0.88rem', margin: 0 }}>{result}</pre>
+                <div style={{ marginTop: '24px', padding: '18px', background: '#000', border: '1px solid #dc2626', borderRadius: '12px', boxShadow: '0 0 20px rgba(220, 38, 38, 0.15)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <h3 style={{ margin: 0, color: '#ef4444', fontSize: '1rem', fontWeight: '800' }}>✨ Твоят генериран скрипт:</h3>
+                    <button
+                      onClick={() => navigator.clipboard.writeText(result)}
+                      style={{ background: '#18181b', border: '1px solid #27272a', color: '#a1a1aa', padding: '4px 8px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}
+                    >
+                      Копирай 📋
+                    </button>
+                  </div>
+                  <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontFamily: 'inherit', color: '#e4e4e7', fontSize: '0.88rem', margin: 0, lineHeight: '1.6' }}>{result}</pre>
                 </div>
               )}
             </section>
 
+            {/* СЕКЦИЯ С ЦЕНИТЕ (ПЛАНОВЕ С ПЪЛНО ОПИСАНИЕ И STRIPE ЛИНКОВЕ) */}
             {!isSubscribed && (
-              <section id="pricing" style={{ textAlign: 'center', marginBottom: '40px' }}>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '20px' }}>Избери план за пълен достъп</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+              <section id="pricing" style={{ textAlign: 'center', marginBottom: '50px' }}>
+                <h2 style={{ fontSize: '1.6rem', fontWeight: '900', marginBottom: '8px' }}>Избери план за пълен достъп</h2>
+                <p style={{ color: '#71717a', fontSize: '0.88rem', marginBottom: '28px' }}>Получете незабавен достъп и отключете потенциала на вашите видеа.</p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
                   
-                  <div style={{ background: 'rgba(15, 23, 42, 0.65)', border: '1px solid #334155', borderRadius: '14px', padding: '20px', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  {/* STARTER PLAN */}
+                  <div style={{
+                    background: '#0a0a0a',
+                    border: '1px solid #27272a',
+                    borderRadius: '16px',
+                    padding: '24px',
+                    textAlign: 'left',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justify: 'space-between',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                  }}>
                     <div>
-                      <h3 style={{ fontSize: '1.15rem', color: '#fff' }}>Starter</h3>
-                      <div style={{ fontSize: '1.8rem', fontWeight: '800', margin: '10px 0', color: '#fff' }}>€19.99 <span style={{ fontSize: '0.8rem', color: '#64748b' }}>/мес</span></div>
-                      <p style={{ color: '#cbd5e1', fontSize: '0.82rem' }}>✓ 50 AI Скрипта на месец</p>
-                    </div>
-                    <a href={STRIPE_STARTER_LINK} target="_blank" rel="noopener noreferrer" style={{ marginTop: '20px', padding: '10px', background: '#1e293b', color: '#fff', borderRadius: '8px', textAlign: 'center', textDecoration: 'none', fontWeight: '700', fontSize: '0.88rem' }}>Купи Starter 💳</a>
-                  </div>
-
-                  <div style={{ background: 'rgba(15, 23, 42, 0.95)', border: '2px solid #818cf8', borderRadius: '14px', padding: '20px', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.15rem', color: '#fff' }}>Pro</h3>
-                      <div style={{ fontSize: '1.8rem', fontWeight: '800', margin: '10px 0', color: '#fff' }}>€39.99 <span style={{ fontSize: '0.8rem', color: '#64748b' }}>/мес</span></div>
-                      <p style={{ color: '#cbd5e1', fontSize: '0.82rem' }}>✓ Неограничени скриптове</p>
-                    </div>
-                    <a href={STRIPE_PRO_LINK} target="_blank" rel="noopener noreferrer" style={{ marginTop: '20px', padding: '10px', background: 'linear-gradient(90deg, #6366f1, #a855f7)', color: '#fff', borderRadius: '8px', textAlign: 'center', textDecoration: 'none', fontWeight: '800', fontSize: '0.88rem' }}>Купи Pro 🚀</a>
-                  </div>
-
-                </div>
-              </section>
-            )}
-          </>
-        )}
-
-      </div>
-    </div>
-  );
-}
+                      <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#a1a1aa', textTransform: 'upper
