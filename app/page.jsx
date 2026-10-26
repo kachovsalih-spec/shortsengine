@@ -431,6 +431,7 @@ export default function Home() {
       </div>
       <p>© 2026 ShortsEngine AI. Всички права са запазени.</p>
     </footer>
+    </div>
   </div>
 );
 }
