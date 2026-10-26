@@ -418,8 +418,8 @@ export default function Home() {
                     <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '−' : '+'}</span>
                   </div>
                   {openFaq === i && <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: 1.5, margin: '10px 0 0 0' }}>{f.a}</p>}
-                </div>
-  <footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTop: '40px' }}>
+</div>
+<footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTop: '40px' }}>
   <div className="flex justify-center gap-4 text-gray-400 mb-2">
     <a href="/terms" className="hover:underline">Общи условия</a>
     <span>•</span>
