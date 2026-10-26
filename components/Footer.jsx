@@ -1,12 +1,12 @@
 export default function Footer() {
   return (
-    <footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTopS: '40px' }}>
-      <div className="flex justify-center gap-4 text-gray-400 mb-2">
-        <a href="/terms" className="hover:underline">Общи условия</a>
+    <footer style={{ marginTop: '40px', textAlign: 'center', fontSize: '0.75rem', color: '#94a3b8' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '8px' }}>
+        <a href="/terms" style={{ color: '#f87171', textDecoration: 'none' }}>Общи условия</a>
         <span>•</span>
-        <a href="/privacy" className="hover:underline">Политика за поверителност</a>
+        <a href="/privacy" style={{ color: '#f87171', textDecoration: 'none' }}>Политика за поверителност</a>
       </div>
-      <p>&copy; 2026 ShortsEngine AI. Всички права са запазени.</p>
+      <p style={{ margin: 0, color: '#64748b' }}>&copy; 2026 ShortsEngine AI. Всички права са запазени.</p>
     </footer>
   );
 }
