@@ -425,7 +425,15 @@ export default function Home() {
         )}
 
         <footer style={{ textAlign: 'center', color: '#64748b', fontSize: '0.78rem', marginTop: '40px' }}>
-          © {new Date().getFullYear()} ShortsEngine AI. Всички права са запазени.
+      <footer className="py-6 text-center text-xs text-gray-500 space-y-2">
+  <div className="flex justify-center gap-4 text-gray-400 mb-2">
+    <a href="/terms" className="hover:underline">Общи условия</a>
+    <span>•</span>
+    <a href="/privacy" className="hover:underline">Политика за поверителност</a>
+  </div>
+  <p>© 2026 ShortsEngine AI. Всички права са запазени.</p>
+</footer>
+
         </footer>
       </div>
     </div>
