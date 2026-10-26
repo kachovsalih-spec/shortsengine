@@ -416,15 +416,14 @@ export default function Home() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
                     <span>{f.q}</span>
                     <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '−' : '+'}</span>
-                  </div>
-                  {openFaq === i && <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: 1.5, margin: '10px 0 0 0' }}>{f.a}</p>}
+                 </div>     
  {openFaq === i && (
         <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: 1.5 }}>
           {f.a}
         </p>
       )}
     </div>
-  ))}
+))}
  </div>
     </section>
 
