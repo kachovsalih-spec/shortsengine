@@ -422,8 +422,9 @@ export default function Home() {
                         {f.a}
                       </p>
                     )}
-            </div>
-            ))}
+               </div>
+            )}
+              
               <footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTop: '40px' }}>
                 <div className="flex justify-center gap-4 text-gray-400 mb-2">
                   <a href="/terms" className="hover:underline">Общи условия</a>
@@ -435,4 +436,4 @@ export default function Home() {
           </div>
         </div>
       );
-    }
+        }
