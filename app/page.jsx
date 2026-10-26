@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import PricingSection from '../components/PricingSection';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -18,6 +19,12 @@ export default function Home() {
   const [generationsLeft, setGenerationsLeft] = useState(1);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+
+  // Интерактивен рейтинг с начална стойност 4.9 и 235 гласа
+  const [userRating, setUserRating] = useState(0);
+  const [rated, setRated] = useState(false);
+  const [totalReviews, setTotalReviews] = useState(235);
+  const [averageRating, setAverageRating] = useState(4.9);
 
   const STRIPE_STARTER_LINK = "https://buy.stripe.com/3cI9AU3HvfAs89W6TI67S01";
   const STRIPE_PRO_LINK = "https://buy.stripe.com/5kQaEY6THag875Sa5U67S00";
@@ -60,6 +67,17 @@ export default function Home() {
   const handleLogout = () => {
     localStorage.removeItem('shortsEngine_email');
     setIsLoggedIn(false); setEmail(''); setResult('');
+  };
+
+  const handleRate = (stars) => {
+    if (rated) return;
+    setUserRating(stars);
+    setRated(true);
+    // Пресмятаме нов среден рейтинг динамично
+    const newTotal = totalReviews + 1;
+    const newAvg = ((averageRating * totalReviews + stars) / newTotal).toFixed(1);
+    setTotalReviews(newTotal);
+    setAverageRating(newAvg);
   };
 
   const handleGenerate = async (e) => {
@@ -142,23 +160,43 @@ export default function Home() {
             Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
 
-          {/* RATING BADGE */}
+          {/* RATING BADGE & INTERACTIVE RATING */}
           <div style={{
             display: 'inline-flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            gap: '8px',
-            padding: '8px 16px',
-            background: 'rgba(15, 23, 42, 0.8)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '30px',
+            gap: '6px',
+            padding: '10px 18px',
+            background: 'rgba(15, 23, 42, 0.85)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            borderRadius: '20px',
             fontSize: '0.85rem',
             color: '#cbd5e1',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+            boxShadow: '0 4px 15px rgba(0,0,0,0.4)'
           }}>
-            <span style={{ color: '#f59e0b', fontSize: '1rem', letterSpacing: '2px' }}>⭐⭐⭐⭐⭐</span>
-            <span style={{ fontWeight: '700', color: '#fff' }}>4.9/5</span>
-            <span style={{ color: '#64748b' }}>|</span>
-            <span style={{ color: '#94a3b8' }}>Над <strong>1,450+</strong> доволни творци</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ color: '#f59e0b', fontSize: '1rem', letterSpacing: '1px' }}>⭐⭐⭐⭐⭐</span>
+              <span style={{ fontWeight: '700', color: '#fff' }}>{averageRating}/5</span>
+              <span style={{ color: '#64748b' }}>|</span>
+              <span style={{ color: '#94a3b8' }}>От <strong>{totalReviews}</strong> творци</span>
+            </div>
+            
+            <div style={{ fontSize: '0.78rem', color: '#94a3b8', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '6px', width: '100%', textAlign: 'center' }}>
+              {rated ? (
+                <span style={{ color: '#4ade80', fontWeight: 600 }}>✨ Благодарим ти за оценката!</span>
+              ) : (
+                <span>Оцени платформата: {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    onClick={() => handleRate(star)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', padding: '0 2px' }}
+                    title={`Оцени с ${star} звезди`}
+                  >
+                    ⭐
+                  </button>
+                ))}</span>
+              )}
+            </div>
           </div>
         </header>
 
@@ -450,7 +488,7 @@ export default function Home() {
                     cursor: 'pointer'
                   }}
                 >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
                     <span>{f.q}</span>
                     <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '-' : '+'}</span>
                   </div>
@@ -464,6 +502,9 @@ export default function Home() {
             </section>
           </>
         )}
+
+        {/* FOOTER */}
+        <Footer />
 
       </div>
     </div>
