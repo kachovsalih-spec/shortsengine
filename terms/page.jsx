@@ -1,28 +1,22 @@
-export default function TermsPage() {
+
+Office_Sk
+21:19 (преди 0 минути)
+до мен
+
+export default function Terms() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 text-gray-200">
-      <h1 className="text-3xl font-bold mb-6 text-white">Общи условия</h1>
-      <p className="mb-4 text-sm text-gray-400">Последна промяна: 2026 г.</p>
-      
-      <section className="mb-6 space-y-3">
-        <h2 className="text-xl font-semibold text-white">1. Приемане на условията</h2>
-        <p>С достъпа и използването на ShortsEngine AI (shortsengine.xyz), вие се съгласявате да спазвате настоящите Общи условия.</p>
-      </section>
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', color: '#f1f5f9', background: '#04060b', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', lineHeight: '1.6' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '20px', color: '#fff' }}>Общи условия за ползване</h1>
+      <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Последна актуализация: Октомври 2026 г.</p>
 
-      <section className="mb-6 space-y-3">
-        <h2 className="text-xl font-semibold text-white">2. Услуги и Абонаменти</h2>
-        <p>ShortsEngine AI предоставя базирани на изкуствен интелект инструменти за генериране на текстово съдържание и скриптове за видеа. Достъпът до услугите се предоставя чрез безплатни опити и платени абонаментни планове.</p>
-      </section>
+      <h2 style={{ fontSize: '1.2rem', color: '#f87171', marginTop: '25px', marginBottom: '10px' }}>1. Общи разпоредби</h2>
+      <p>Тези общи условия уреждат взаимоотношенията между платформата ShortsEngine AI и потребителите, които използват услугите за генериране на съдържание и абонаментните планове.</p>
 
-      <section className="mb-6 space-y-3">
-        <h2 className="text-xl font-semibold text-white">3. Плащания и Отказ</h2>
-        <p>Всички плащания се обработват сигурно чрез Stripe. Можете да прекратите абонамента си по всяко време от профила си или като се свържете с нашата поддръжка.</p>
-      </section>
+      <h2 style={{ fontSize: '1.2rem', color: '#f87171', marginTop: '25px', marginBottom: '10px' }}>2. Услуги и Абонаменти</h2>
+      <p>ShortsEngine AI предоставя инструменти, базирани на изкуствен интелект, за създаване на видео скриптове. Платените абонаменти се обработват сигурно през платформата Stripe и осигуряват неограничен достъп според избрания план.</p>
 
-      <section className="mb-6 space-y-3">
-        <h2 className="text-xl font-semibold text-white">4. Авторски права върху съдържанието</h2>
-        <p>Вие запазвате пълните търговски права върху скриптовете и текста, генериран чрез ShortsEngine AI за вашите проекти.</p>
-      </section>
+      <h2 style={{ fontSize: '1.2rem', color: '#f87171', marginTop: '25px', marginBottom: '10px' }}>3. Отказ от отговорност и възстановяване</h2>
+      <p>Тъй като услугите се предоставят дигитално и в реално време, потребителят се съгласява с естеството на генерираното от AI съдържание. Абонаментите могат да бъдат прекратени по всяко време през клиентския портал.</p>
     </div>
   );
 }
