@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import PricingSection from '../components/PricingSection';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -450,5 +451,4 @@ export default function Home() {
                     cursor: 'pointer'
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
-                    <spa
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', font
