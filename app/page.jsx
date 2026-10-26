@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import PricingSection from '../components/PricingSection';
-import Footer from '../components/Footer';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -451,4 +450,22 @@ export default function Home() {
                     cursor: 'pointer'
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', font
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
+                    <span>{f.q}</span>
+                    <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '-' : '+'}</span>
+                  </div>
+                  {openFaq === i && (
+                    <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: '1.5' }}>
+                      {f.a}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </section>
+          </>
+        )}
+
+      </div>
+    </div>
+  );
+}
