@@ -138,9 +138,28 @@ export default function Home() {
           }}>
             Създавай хитови видеа за секунди
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.98rem', margin: 0, fontWeight: '500', lineHeight: '1.4' }}>
+          <p style={{ color: '#94a3b8', fontSize: '0.98rem', margin: '0 0 16px 0', fontWeight: '500', lineHeight: '1.4' }}>
             Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
+
+          {/* RATING BADGE (Рейтинг меню на началната страница) */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '8px 16px',
+            background: 'rgba(15, 23, 42, 0.8)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '30px',
+            fontSize: '0.85rem',
+            color: '#cbd5e1',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+          }}>
+            <span style={{ color: '#f59e0b', fontSize: '1rem', letterSpacing: '2px' }}>⭐⭐⭐⭐⭐</span>
+            <span style={{ fontWeight: '700', color: '#fff' }}>4.9/5</span>
+            <span style={{ color: '#64748b' }}>|</span>
+            <span style={{ color: '#94a3b8' }}>Над <strong>1,450+</strong> доволни творци</span>
+          </div>
         </header>
 
         {!isLoggedIn ? (
@@ -201,6 +220,23 @@ export default function Home() {
           </div>
         ) : (
           <>
+            {generationsLeft <= 0 && !isSubscribed && (
+              <div style={{
+                background: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid rgba(239, 68, 68, 0.4)',
+                borderRadius: '14px',
+                padding: '16px',
+                textAlign: 'center',
+                marginBottom: '24px',
+                color: '#f87171',
+                fontSize: '0.95rem',
+                fontWeight: 700,
+                boxShadow: '0 0 20px rgba(239, 68, 68, 0.2)'
+              }}>
+                ⚡ Безплатните опити свършиха! Отключи неограничена мощ и създавай съдържание, което завладява аудиторията.
+              </div>
+            )}
+
             {isSubscribed && (
               <div style={{
                 background: 'rgba(34, 197, 94, 0.12)',
@@ -260,7 +296,6 @@ export default function Home() {
               </div>
 
               <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {/* Responsive grid for selectors */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '12px' }}>
                   <div>
                     <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '5px', fontWeight: 700 }}>ПЛАТФОРМА</label>
@@ -391,54 +426,28 @@ export default function Home() {
                 </div>
               )}
             </div>
-          </>
-        )}
 
-        {/* PRICING SECTION */}
-        {!isSubscribed && (
-          <PricingSection STRIPE_STARTER_LINK={STRIPE_STARTER_LINK} STRIPE_PRO_LINK={STRIPE_PRO_LINK} />
-        )}
-
-        {/* FAQ SECTION */}
-        <section style={{ maxWidth: '700px', margin: '0 auto 30px auto' }}>
-          <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '1.3rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
-          {faqs.map((f, i) => (
-            <div
-              key={i}
-              onClick={() => setOpenFaq(openFaq === i ? null : i)}
-              style={{
-                background: 'rgba(15, 23, 42, 0.6)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '14px',
-                padding: '16px 18px',
-                marginBottom: '10px',
-                cursor: 'pointer'
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
-                <span>{f.q}</span>
-                <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '-' : '+'}</span>
+            {/* PRICING SECTION */}
+            {!isSubscribed && (
+              <div id="pricing-section">
+                <PricingSection STRIPE_STARTER_LINK={STRIPE_STARTER_LINK} STRIPE_PRO_LINK={STRIPE_PRO_LINK} />
               </div>
-              {openFaq === i && (
-                <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: '1.5' }}>
-                  {f.a}
-                </p>
-              )}
-            </div>
-          ))}
-        </section>
+            )}
 
-        {/* FOOTER */}
-        <footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTop: '40px' }}>
-          <div className="flex justify-center gap-4 text-gray-400 mb-2">
-            <a href="/terms" className="hover:underline">Общи условия</a>
-            <span>•</span>
-            <a href="/privacy" className="hover:underline">Политика за поверителност</a>
-          </div>
-          <p>&copy; 2026 ShortsEngine AI. Всички права са запазени.</p>
-        </footer>
-
-      </div>
-    </div>
-  );
-}
+            {/* FAQ SECTION */}
+            <section style={{ maxWidth: '700px', margin: '0 auto 30px auto' }}>
+              <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '1.3rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
+              {faqs.map((f, i) => (
+                <div
+                  key={i}
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  style={{
+                    background: 'rgba(15, 23, 42, 0.6)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '14px',
+                    padding: '16px 18px',
+                    marginBottom: '10px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: 
