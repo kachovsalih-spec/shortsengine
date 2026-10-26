@@ -1,8 +1,3 @@
-
-Office_Sk
-21:19 (преди 0 минути)
-до мен
-
 export default function Terms() {
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px', color: '#f1f5f9', background: '#04060b', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', lineHeight: '1.6' }}>
