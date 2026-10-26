@@ -142,7 +142,7 @@ export default function Home() {
             Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
 
-          {/* RATING BADGE (Рейтинг меню на началната страница) */}
+          {/* RATING BADGE */}
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -450,4 +450,5 @@ export default function Home() {
                     cursor: 'pointer'
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: 
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
+                    <spa
