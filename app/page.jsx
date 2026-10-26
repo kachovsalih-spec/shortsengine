@@ -14,7 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
-  
+ 
   const [generationsLeft, setGenerationsLeft] = useState(1);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
@@ -107,7 +107,7 @@ export default function Home() {
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
       <div style={{ maxWidth: '780px', margin: '0 auto' }}>
-        
+       
         {/* HEADER */}
         <header style={{ textAlign: 'center', marginBottom: '35px' }}>
           <div style={{
@@ -391,48 +391,54 @@ export default function Home() {
                 </div>
               )}
             </div>
+          </>
+        )}
 
-            {/* PRICING SECTION */}
-            {!isSubscribed && (
-              <PricingSection STRIPE_STARTER_LINK={STRIPE_STARTER_LINK} STRIPE_PRO_LINK={STRIPE_PRO_LINK} />
-            )}
+        {/* PRICING SECTION */}
+        {!isSubscribed && (
+          <PricingSection STRIPE_STARTER_LINK={STRIPE_STARTER_LINK} STRIPE_PRO_LINK={STRIPE_PRO_LINK} />
+        )}
 
-            {/* FAQ SECTION */}
-            <section style={{ maxWidth: '700px', margin: '0 auto 30px auto' }}>
-              <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '1.3rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
-              {faqs.map((f, i) => (
-                <div
-                  key={i}
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  style={{
-                    background: 'rgba(15, 23, 42, 0.6)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '14px',
-                    padding: '16px 18px',
-                    marginBottom: '10px',
-                    cursor: 'pointer'
-                  }}
-                >
-                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
-                      <span>{f.q}</span>
-                      <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '-' : '+'}</span>
-                    </div>
-                    {openFaq === i && (
-                      <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: '1.5' }}>
-                        {f.a}
-                      </p>
-                    )}
-               </div>
-              
-              <footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTop: '40px' }}>
-                <div className="flex justify-center gap-4 text-gray-400 mb-2">
-                  <a href="/terms" className="hover:underline">Общи условия</a>
-                  <span>•</span>
-                  <a href="/privacy" className="hover:underline">Политика за поверителност</a>
-                </div>
-                <p>&copy; 2026 ShortsEngine AI. Всички права са запазени.</p>
-              </footer>
+        {/* FAQ SECTION */}
+        <section style={{ maxWidth: '700px', margin: '0 auto 30px auto' }}>
+          <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '1.3rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
+          {faqs.map((f, i) => (
+            <div
+              key={i}
+              onClick={() => setOpenFaq(openFaq === i ? null : i)}
+              style={{
+                background: 'rgba(15, 23, 42, 0.6)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '14px',
+                padding: '16px 18px',
+                marginBottom: '10px',
+                cursor: 'pointer'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
+                <span>{f.q}</span>
+                <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '-' : '+'}</span>
+              </div>
+              {openFaq === i && (
+                <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: '1.5' }}>
+                  {f.a}
+                </p>
+              )}
+            </div>
+          ))}
+        </section>
+
+        {/* FOOTER */}
+        <footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTop: '40px' }}>
+          <div className="flex justify-center gap-4 text-gray-400 mb-2">
+            <a href="/terms" className="hover:underline">Общи условия</a>
+            <span>•</span>
+            <a href="/privacy" className="hover:underline">Политика за поверителност</a>
           </div>
-        </div>
-      );
-        }
+          <p>&copy; 2026 ShortsEngine AI. Всички права са запазени.</p>
+        </footer>
+
+      </div>
+    </div>
+  );
+}
