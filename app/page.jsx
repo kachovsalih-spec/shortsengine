@@ -285,7 +285,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '5px', fontWeight: 700 }}>СТИЛ НА СХЕМАТА</label>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '5px', fontWeight: 700 }}>Тоналност на видеото</label>
                     <select
                       value={tone}
                       onChange={(e) => setTone(e.target.value)}
