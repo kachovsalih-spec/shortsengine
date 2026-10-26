@@ -413,16 +413,18 @@ export default function Home() {
                     cursor: 'pointer'
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
-                    <span>{f.q}</span>
-                    <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '−' : '+'}</span>
-                 </div>     
-           {openFaq === i && (
+                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
+                      <span>{f.q}</span>
+                      <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '-' : '+'}</span>
+                    </div>
+                    {openFaq === i && (
                       <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: '1.5' }}>
                         {f.a}
                       </p>
                     )}
                   </div>
+                ))}
+              </div>
 
               <footer className="py-6 text-center text-xs text-gray-500 space-y-2" style={{ marginTop: '40px' }}>
                 <div className="flex justify-center gap-4 text-gray-400 mb-2">
@@ -433,5 +435,7 @@ export default function Home() {
                 <p>&copy; 2026 ShortsEngine AI. Всички права са запазени.</p>
               </footer>
             </div>
-        );
-      }
+          </div>
+        </div>
+      );
+    }
