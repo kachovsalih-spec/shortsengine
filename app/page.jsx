@@ -19,6 +19,7 @@ export default function Home() {
   const [generationsLeft, setGenerationsLeft] = useState(1);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+  const [planType, setPlanType] = useState('starter');
 
   // Интерактивен рейтинг с начална стойност 4.9 и 235 гласа
   const [userRating, setUserRating] = useState(0);
@@ -68,6 +69,8 @@ export default function Home() {
       if (data) {
         setIsSubscribed(data.is_subscribed);
         setGenerationsLeft(data.generations_left);
+        setPlanType(data.plan_type || 'starter');
+
       }
     } catch (err) { setError('Грешка при вход. Опитайте отново.'); }
     finally { setLoading(false); }
