@@ -1,72 +1,70 @@
-use client';
+'use client';
 
 import React from 'react';
 
 export default function PricingSection() {
   return (
-    <section className="py-16 px-4 max-w-6xl mx-auto text-white" id="pricing">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+    <section style={{ padding: '64px 16px', maxWidth: '1100px', margin: '0 auto', color: '#ffffff' }} id="pricing">
+      <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '16px' }}>
           Изберете вашия план за растеж
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p style={{ color: '#9ca3af', maxWidth: '600px', margin: '0 auto' }}>
           Генерирайте вирусни сценарии за секунди и изградете устойчива публика в TikTok, Instagram и YouTube.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', maxWidth: '900px', margin: '0 auto' }}>
+        
         {/* Starter Plan */}
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 flex flex-col justify-between hover:border-gray-700 transition">
+        <div style={{ backgroundColor: '#111827', border: '1px solid #1f2937', borderRadius: '16px', padding: '32px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <h3 className="text-xl font-bold mb-2">⚡ Starter План</h3>
-            <p className="text-gray-400 text-sm mb-6">Перфектен за начинаещи творци и самостоятелни бизнеси.</p>
-            <div className="text-4xl font-black mb-6">
-              €19.99 <span className="text-base font-normal text-gray-400">/ месец</span>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '8px' }}>⚡ Starter План</h3>
+            <p style={{ color: '#9ca3af', fontSize: '0.875rem', marginBottom: '24px' }}>Перфектен за начинаещи творци и самостоятелни бизнеси.</p>
+            <div style={{ fontSize: '2.25rem', fontWeight: '900', marginBottom: '24px' }}>
+              €19.99 <span style={{ fontSize: '1rem', fontWeight: 'normal', color: '#9ca3af' }}>/ месец</span>
             </div>
-            <ul className="space-y-4 mb-8 text-gray-300 text-sm">
-              <li className="flex items-center gap-2">✓ <strong>100 AI Генерации</strong> на месец</li>
-              <li className="flex items-center gap-2">✓ Поддръжка на <strong>TikTok, Reels & Shorts</strong></li>
-              <li className="flex items-center gap-2">✓ Формат <strong>Hook-Story-Offer</strong></li>
-              <li className="flex items-center gap-2">✓ Готови descriptions & hashtags</li>
-              <li className="flex items-center gap-2 text-gray-500">✕ B-Roll & Визуални бележки</li>
-              <li className="flex items-center gap-2 text-gray-500">✕ VIP Discord общност</li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0', display: 'flex', flexDirection: 'column', gap: '16px', fontSize: '0.875rem', color: '#d1d5db' }}>
+              <li>✓ <strong>100 AI Генерации</strong> на месец</li>
+              <li>✓ Поддръжка на <strong>TikTok, Reels & Shorts</strong></li>
+              <li>✓ Формат <strong>Hook-Story-Offer</strong></li>
+              <li>✓ Готови descriptions & hashtags</li>
+              <li style={{ color: '#4b5563', textDecoration: 'line-through' }}>✕ B-Roll & Визуални бележки</li>
+              <li style={{ color: '#4b5563', textDecoration: 'line-through' }}>✕ VIP Discord общност</li>
             </ul>
           </div>
-          <button className="w-full py-3 px-6 rounded-xl font-bold bg-gray-800 hover:bg-gray-700 transition">
+          <button style={{ width: '100%', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', backgroundColor: '#1f2937', color: '#ffffff', border: 'none', cursor: 'pointer' }}>
             Започни със Starter
           </button>
         </div>
 
         {/* Pro Plan */}
-        <div className="bg-gradient-to-b from-red-900/30 to-gray-900 border-2 border-red-500 rounded-2xl p-8 flex flex-col justify-between relative shadow-xl shadow-red-950/40">
-          <div className="absolute -top-4 right-6 bg-red-500 text-white text-xs uppercase font-extrabold py-1 px-3 rounded-full tracking-wider">
+        <div style={{ backgroundColor: '#180a0a', border: '2px solid #ef4444', borderRadius: '16px', padding: '32px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', boxShadow: '0 10px 25px rgba(239, 68, 68, 0.2)' }}>
+          <div style={{ position: 'absolute', top: '-14px', right: '24px', backgroundColor: '#ef4444', color: '#ffffff', fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', padding: '4px 12px', borderRadius: '9999px', letterSpacing: '0.05em' }}>
             Най-популярен
           </div>
           <div>
-            <h3 className="text-xl font-bold mb-2 text-red-400">🔥 Pro План</h3>
-            <p className="text-gray-300 text-sm mb-6">За сериозни творци, които искат максимална гледаемост.</p>
-            <div className="text-4xl font-black mb-6">
-              €39.99 <span className="text-base font-normal text-gray-400">/ месец</span>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '8px', color: '#f87171' }}>🔥 Pro План</h3>
+            <p style={{ color: '#e5e7eb', fontSize: '0.875rem', marginBottom: '24px' }}>За сериозни творци, които искат максимална гледаемост.</p>
+            <div style={{ fontSize: '2.25rem', fontWeight: '900', marginBottom: '24px' }}>
+              €39.99 <span style={{ fontSize: '1rem', fontWeight: 'normal', color: '#9ca3af' }}>/ месец</span>
             </div>
-            <ul className="space-y-4 mb-8 text-gray-200 text-sm">
-              <li className="flex items-center gap-2">👑 <strong>Неограничени</strong> AI генерации</li>
-              <li className="flex items-center gap-2 text-red-400 font-semibold">
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0', display: 'flex', flexDirection: 'column', gap: '16px', fontSize: '0.875rem', color: '#f3f4f6' }}>
+              <li>👑 <strong>Неограничени</strong> AI генерации</li>
+              <li style={{ color: '#f87171', fontWeight: '600' }}>
                 💬 <strong>VIP Discord Общност</strong> (Private Access)
               </li>
-              <li className="flex items-center gap-2">
-                🎬 <strong>B-Roll & Visual Notes</strong> (режисьорски бележки)
-              </li>
-              <li className="flex items-center gap-2">
-                📌 <strong>3 Thumbnail Hooks</strong> (заглавия за корици)
-              </li>
-              <li className="flex items-center gap-2">✓ Приоритетна бързина на AI модела</li>
-              <li className="flex items-center gap-2">✓ Достъп до нови функции преди всички</li>
+              <li>🎬 <strong>B-Roll & Visual Notes</strong> (режисьорски бележки)</li>
+              <li>📌 <strong>3 Thumbnail Hooks</strong> (заглавия за корици)</li>
+              <li>✓ Приоритетна бързина на AI модела</li>
+              <li>✓ Достъп до нови функции преди всички</li>
             </ul>
           </div>
-          <button className="w-full py-3 px-6 rounded-xl font-bold bg-red-600 hover:bg-red-500 transition shadow-lg shadow-red-600/30">
+          <button style={{ width: '100%', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', backgroundColor: '#dc2626', color: '#ffffff', border: 'none', cursor: 'pointer', boxShadow: '0 4px 14px rgba(220, 38, 38, 0.4)' }}>
             Вземи Pro + VIP Discord
           </button>
         </div>
+
       </div>
     </section>
   );
