@@ -38,17 +38,24 @@ export default function Home() {
     }
   }, []);
 
-  const loadUser = async (uEmail) => {
-    try {
-      let { data } = await supabase.from('users').select('*').eq('email', uEmail).single();
-      if (data) {
-        setIsLoggedIn(true);
-        setIsSubscribed(data.is_subscribed);
+const loadUser = async (uEmail) => {
+  try {
+    let { data } = await supabase.from('users').select('*').eq('email', uEmail).single();
+    if (data) {
+      setIsLoggedIn(true);
+      setIsSubscribed(data.is_subscribed);
+      const currentPlan = data.plan_type || 'starter';
+      setPlanType(currentPlan);
+
+      // Ако потребителят е Pro или Admin, му отключваме пълния достъп (999 генерации)
+      if (currentPlan === 'pro' || currentPlan === 'admin') {
+        setGenerationsLeft(999);
+      } else {
         setGenerationsLeft(data.generations_left);
-        setPlanType(data.plan_type || 'starter');
       }
-    } catch (e) { console.error(e); }
-  };
+    }
+  } catch (e) { console.error(e); }
+};
 
   const handleLogin = async (e) => {
     e.preventDefault();
