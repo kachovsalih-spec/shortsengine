@@ -47,7 +47,6 @@ const loadUser = async (uEmail) => {
       const userPlan = data.plan_type || 'starter';
       setPlanType(userPlan);
 
-      // Ако е админ или pro, принудително задаваме неограничени генерации в състоянието
       if (userPlan === 'admin' || userPlan === 'pro') {
         setGenerationsLeft(999);
       } else {
@@ -56,7 +55,6 @@ const loadUser = async (uEmail) => {
     }
   } catch (e) { console.error(e); }
 };
-
 
   const handleLogin = async (e) => {
     e.preventDefault();
