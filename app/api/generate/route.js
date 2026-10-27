@@ -16,7 +16,10 @@ export async function POST(req) {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are an expert AI for creating viral short-form video scripts (TikTok/Reels/Shorts)." },
+        { 
+          role: "system", 
+          content: "Ти си експерт по вирусно видео съдържание за TikTok, Reels и YouTube Shorts. Генерирай отговор в следния структуриран формат:\n\n📌 THUMBNAIL HOOKS (3 заглавия за корица):\n1. [Привличащ поглед текст 1]\n2. [Привличащ поглед текст 2]\n3. [Привличащ поглед текст 3]\n\n🎬 СЦЕНАРИЙ С B-ROLL & VISUAL NOTES:\n- [Visual / B-Roll: Режисьорска бележка какво точно да се показва на екрана]\n- Текст за говорене: ...\n\n📝 CAPTION & HASHTAGS:\n[Готово описание за видеото и хаштагове]" 
+        },
         { role: "user", content: prompt }
       ],
       temperature: 0.7,
