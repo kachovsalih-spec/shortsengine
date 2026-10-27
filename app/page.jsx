@@ -53,13 +53,22 @@ export default function Home() {
     if (!email.includes('@')) { setError('Моля, въведете валиден имейл адрес.'); return; }
     setLoading(true); setError('');
     try {
+      // 1. Регистрира/Записва имейла автоматично в Supabase Auth Users
+      await supabase.auth.signInWithOtp({ email });
+
+      // 2. Проверява/създава профила в таблица users
       let { data } = await supabase.from('users').select('*').eq('email', email).single();
       if (!data) {
         const { data: nUser } = await supabase.from('users').insert([{ email, generations_left: 1, is_subscribed: false }]).select().single();
         data = nUser;
       }
+
       localStorage.setItem('shortsEngine_email', email);
-      setIsLoggedIn(true); setIsSubscribed(data.is_subscribed); setGenerationsLeft(data.generations_left);
+      setIsLoggedIn(true);
+      if (data) {
+        setIsSubscribed(data.is_subscribed);
+        setGenerationsLeft(data.generations_left);
+      }
     } catch (err) { setError('Грешка при вход. Опитайте отново.'); }
     finally { setLoading(false); }
   };
