@@ -45,6 +45,7 @@ export default function Home() {
         setIsLoggedIn(true);
         setIsSubscribed(data.is_subscribed);
         setGenerationsLeft(data.generations_left);
+        setPlanType(data.plan_type || 'starter');
       }
     } catch (e) { console.error(e); }
   };
