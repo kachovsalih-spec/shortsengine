@@ -340,7 +340,7 @@ const loadUser = async (uEmail) => {
   <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>⚡ Pro План</span>
 ) : (
                     {isSubscribed ? '✨ Неограничен' : `📊 Опити: ${generationsLeft}`}
-                    )}
+    
                   </span>
                   <button
                     onClick={handleLogout}
