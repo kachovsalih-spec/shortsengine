@@ -44,11 +44,11 @@ const loadUser = async (uEmail) => {
     if (data) {
       setIsLoggedIn(true);
       setIsSubscribed(data.is_subscribed);
-      const currentPlan = data.plan_type || 'starter';
-      setPlanType(currentPlan);
+      const userPlan = data.plan_type || 'starter';
+      setPlanType(userPlan);
 
-      // Ако потребителят е Pro или Admin, му отключваме пълния достъп (999 генерации)
-      if (currentPlan === 'pro' || currentPlan === 'admin') {
+      // Ако е админ или pro, принудително задаваме неограничени генерации в състоянието
+      if (userPlan === 'admin' || userPlan === 'pro') {
         setGenerationsLeft(999);
       } else {
         setGenerationsLeft(data.generations_left);
@@ -56,6 +56,7 @@ const loadUser = async (uEmail) => {
     }
   } catch (e) { console.error(e); }
 };
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
