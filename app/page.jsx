@@ -334,13 +334,14 @@ const loadUser = async (uEmail) => {
                     fontSize: '0.75rem',
                     fontWeight: '800'
                   }}>
-                    {planType === 'admin' ? (
+              {planType === 'admin' ? (
   <span style={{ color: '#ef4444', fontWeight: 'bold' }}>👑 Admin План</span>
 ) : planType === 'pro' ? (
   <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>⚡ Pro План</span>
 ) : (
-                    {isSubscribed ? '✨ Неограничен' : `📊 Опити: ${generationsLeft}`}
-    
+  isSubscribed ? '🔥 Неограничен' : `🔥 Опити: ${generationsLeft}`
+)}
+
                   </span>
                   <button
                     onClick={handleLogout}
