@@ -62,7 +62,7 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
           </button>
         </div>
 
-        {/* Pro Plan with red accent border */}
+        {/* Pro Plan with red border highlight */}
         <div style={{
           backgroundColor: '#111827',
           border: '2px solid #ef4444',
@@ -89,14 +89,14 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> <strong>Неограничени AI Генерации</strong></li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Приоритетна генерация</li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> B-Roll & Визуални бележки</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> VIP Discord общност</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Достъп до VIP Discord общност</li>
             </ul>
           </div>
           <button 
             onClick={() => STRIPE_PRO_LINK && window.open(STRIPE_PRO_LINK, '_blank')}
             style={{
               width: '100%',
-              padding: '14px 24px',
+... padding: '14px 24px',
               borderRadius: '12px',
               fontWeight: 'bold',
               backgroundColor: '#ef4444',
