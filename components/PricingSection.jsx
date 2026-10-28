@@ -6,111 +6,104 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
   return (
     <section style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto', color: '#ffffff' }} id="pricing-section">
       <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-        <h2 style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '16px', letterSpacing: '-0.02em', background: 'linear-gradient(to right, #ffffff, #9ca3af)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <h2 style={{ fontSize: '2.25rem', fontWeight: '800', marginBottom: '16px', letterSpacing: '-0.02em' }}>
           Изберете вашия план за растеж
         </h2>
-        <p style={{ color: '#9ca3af', fontSize: '1.1rem', maxWidth: '650px', margin: '0 auto', lineHeight: '1.6' }}>
-          Генерирайте вирусни сценарии за секунди и изградете мащабна, ангажирана публика в TikTok, Instagram Reels и YouTube Shorts.
+        <p style={{ color: '#9ca3af', fontSize: '1.05rem', maxWidth: '600px', margin: '0 auto' }}>
+          Генерирайте вирусни сценарии за секунди и изградете устойчива публика в TikTok, Instagram и YouTube.
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '32px', alignItems: 'stretch' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
         
         {/* Starter Plan */}
         <div style={{
-          backgroundColor: 'rgba(17, 24, 39, 0.7)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '24px',
-          padding: '40px 32px',
+          backgroundColor: '#111827',
+          border: '1px solid #374151',
+          borderRadius: '20px',
+          padding: '36px 28px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
-          transition: 'all 0.3s ease'
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+          transition: 'transform 0.2s ease-in-out'
         }}>
           <div>
-            <div style={{ display: 'inline-block', backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', fontSize: '0.8rem', fontWeight: '800', padding: '6px 14px', borderRadius: '99px', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              ⚡ Стартов пакет
+            <div style={{ display: 'inline-block', backgroundColor: '#1f2937', color: '#60a5fa', fontSize: '0.75rem', fontWeight: 'bold', padding: '4px 12px', borderRadius: '99px', marginBottom: '16px' }}>
+              За стартиращи
             </div>
-            <h3 style={{ fontSize: '1.75rem', fontWeight: '800', marginBottom: '10px', color: '#ffffff' }}>Starter Plan</h3>
-            <p style={{ color: '#9ca3af', fontSize: '0.95rem', marginBottom: '28px', lineHeight: '1.6' }}>
-              Перфектното решение за креативни творци и малки брандове, които започват своето пътуване в късото видео.
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '8px', color: '#ffffff' }}>⚡ Starter</h3>
+            <p style={{ color: '#9ca3af', fontSize: '0.875rem', marginBottom: '24px', lineHeight: '1.5' }}>
+              Идеален за начинаещи творци, които искат бързо и лесно видео съдържание.
             </p>
-            <div style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '32px', color: '#ffffff', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-              €19.99 <span style={{ fontSize: '1rem', fontWeight: '500', color: '#9ca3af' }}>/ месец</span>
+            <div style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '28px', color: '#ffffff' }}>
+              €19.99 <span style={{ fontSize: '1rem', fontWeight: 'normal', color: '#9ca3af' }}>/ месец</span>
             </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px 0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem' }}><span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> <strong>100 AI Вирусни Генерации</strong> на месец</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', color: '#d1d5db' }}><span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> Оптимизирани за TikTok, Reels и Shorts</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', color: '#d1d5db' }}><span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> Готови описания & ангажиращи хаштагове</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', color: '#d1d5db' }}><span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> Бърз експорт и копиране с едно кликване</li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#10b981', fontWeight: 'bold' }}>✓</span> <strong>100 AI Генерации</strong></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#10b981', fontWeight: 'bold' }}>✓</span> Поддръжка за TikTok, Reels, Shorts</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#10b981', fontWeight: 'bold' }}>✓</span> Готови descriptions & hashtags</li>
             </ul>
           </div>
           <button 
             onClick={() => STRIPE_STARTER_LINK && window.open(STRIPE_STARTER_LINK, '_blank')}
             style={{
               width: '100%',
-              padding: '16px 24px',
-              borderRadius: '14px',
-              fontWeight: '800',
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              padding: '14px 24px',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              backgroundColor: '#1f2937',
               color: '#ffffff',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
+              border: '1px solid #4b5563',
               cursor: 'pointer',
-              fontSize: '1rem',
-              transition: 'all 0.2s ease'
+              fontSize: '0.95rem'
             }}>
             Започни със Starter
           </button>
         </div>
 
-        {/* Pro Plan with striking highlight border */}
+        {/* Pro Plan with red accent border */}
         <div style={{
-          backgroundColor: 'rgba(17, 24, 39, 0.85)',
-          backdropFilter: 'blur(10px)',
+          backgroundColor: '#111827',
           border: '2px solid #ef4444',
-          borderRadius: '24px',
-          padding: '40px 32px',
+          borderRadius: '20px',
+          padding: '36px 28px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          boxShadow: '0 0 40px rgba(239, 68, 68, 0.25)',
-          position: 'relative',
-          transform: 'scale(1.02)'
+          boxShadow: '0 10px 30px rgba(239, 68, 68, 0.25)',
+          position: 'relative'
         }}>
           <div>
-            <div style={{ display: 'inline-block', backgroundColor: 'rgba(239, 68, 68, 0.2)', color: '#f87171', fontSize: '0.8rem', fontWeight: '800', padding: '6px 14px', borderRadius: '99px', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              🔥 Най-популярен избор
+            <div style={{ display: 'inline-block', backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#f87171', fontSize: '0.75rem', fontWeight: 'bold', padding: '4px 12px', borderRadius: '99px', marginBottom: '16px' }}>
+              Най-популярен
             </div>
-            <h3 style={{ fontSize: '1.75rem', fontWeight: '800', marginBottom: '10px', color: '#ffffff' }}>Pro План</h3>
-            <p style={{ color: '#9ca3af', fontSize: '0.95rem', marginBottom: '28px', lineHeight: '1.6' }}>
-              Създаден за професионалисти, агенции и брандове, които търсят неограничен растеж и максимални резултати.
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '8px', color: '#ffffff' }}>🔥 Pro План</h3>
+            <p style={{ color: '#9ca3af', fontSize: '0.875rem', marginBottom: '24px', lineHeight: '1.5' }}>
+              За професионалисти и брандове, търсещи максимално вирален ефект.
             </p>
-            <div style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '32px', color: '#ffffff', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-              €39.99 <span style={{ fontSize: '1rem', fontWeight: '500', color: '#9ca3af' }}>/ месец</span>
+            <div style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '28px', color: '#ffffff' }}>
+              €39.99 <span style={{ fontSize: '1rem', fontWeight: 'normal', color: '#9ca3af' }}>/ месец</span>
             </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px 0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem' }}><span style={{ color: '#ef4444', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> <strong style={{ color: '#ffffff' }}>Неограничени AI Генерации</strong> (Без лимити!)</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', color: '#d1d5db' }}><span style={{ color: '#ef4444', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> Приоритетна генерация с най-нов модел</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', color: '#d1d5db' }}><span style={{ color: '#ef4444', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> Достъп до затворена VIP Discord общност</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', color: '#d1d5db' }}><span style={{ color: '#ef4444', fontWeight: 'bold', fontSize: '1.1rem' }}>✓</span> Ранен достъп до всички нови функции</li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> <strong>Неограничени AI Генерации</strong></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> Приоритетна генерация</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> B-Roll & Визуални бележки</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#ef4444', fontWeight: 'bold' }}>✓</span> VIP Discord общност</li>
             </ul>
           </div>
           <button 
             onClick={() => STRIPE_PRO_LINK && window.open(STRIPE_PRO_LINK, '_blank')}
             style={{
               width: '100%',
-              padding: '16px 24px',
-              borderRadius: '14px',
-              fontWeight: '800',
-              background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+              padding: '14px 24px',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              backgroundColor: '#ef4444',
               color: '#ffffff',
               border: 'none',
               cursor: 'pointer',
-              fontSize: '1rem',
-              boxShadow: '0 10px 25px rgba(239, 68, 68, 0.4)',
-              transition: 'all 0.2s ease'
+              fontSize: '0.95rem'
             }}>
             Надгради до Pro
           </button>
