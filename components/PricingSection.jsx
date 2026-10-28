@@ -96,7 +96,7 @@ export default function PricingSection({ STRIPE_STARTER_LINK, STRIPE_PRO_LINK })
             onClick={() => STRIPE_PRO_LINK && window.open(STRIPE_PRO_LINK, '_blank')}
             style={{
               width: '100%',
-... padding: '14px 24px',
+              padding: '14px 24px',
               borderRadius: '12px',
               fontWeight: 'bold',
               backgroundColor: '#ef4444',
