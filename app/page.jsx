@@ -544,42 +544,41 @@ const loadUser = async (uEmail) => {
               </div>
             )}
 
-          {/* FAQ SECTION */}
-<section style={{ maxWidth: '800px', margin: '0 auto 80px auto', padding: '0 16px', color: '#fff' }}>
-  <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '2rem', fontWeight: '900' }}>
-    Често задавани въпроси
-  </h2>
-  
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-    {faqs.map((faq, index) => (
-      <div 
-        key={index}
-        onClick={() => setOpenFaq(openFaq === index ? null : index)}
-        style={{
-          background: 'rgba(15, 23, 42, 0.6)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '14px',
-          padding: '16px 18px',
-          cursor: 'pointer'
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: '700', color: '#fff', fontSize: '1rem' }}>
-          <span>{faq.question}</span>
-          <span>{openFaq === index ? '▲' : '▼'}</span>
+            {/* FAQ SECTION */}
+      <section style={{ maxWidth: '800px', margin: '0 auto 80px auto', padding: '0 16px', color: '#fff' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '2rem', fontWeight: '900' }}>
+          Често задавани въпроси
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+              style={{
+                background: 'rgba(15, 23, 42, 0.6)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '14px',
+                padding: '16px 18px',
+                cursor: 'pointer'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: '700', color: '#fff', fontSize: '1rem' }}>
+                <span>{faq.question}</span>
+                <span>{openFaq === index ? '▲' : '▼'}</span>
+              </div>
+              {openFaq === index && (
+                <div style={{ marginTop: '12px', color: '#94a3b8', fontSize: '0.925rem', lineHeight: '1.5' }}>
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-        {openFaq === index && (
-          <div style={{ marginTop: '12px', color: '#94a3b8', fontSize: '0.925rem', lineHeight: '1.5' }}>
-            {faq.answer}
-          </div>
-        )}
-      </div>
-    ))}
-      </div>
-    </section>
+      </section>
 
-    {/* FOOTER */}
-    <Footer />
+      {/* FOOTER */}
+      <Footer />
 
-  </div>
-);
+    </div>
+  );
 }
