@@ -538,7 +538,6 @@ const loadUser = async (uEmail) => {
         {/* FOOTER */}
         <Footer />
 
-      </div>
     </div>
   );
 }
