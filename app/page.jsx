@@ -21,9 +21,11 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState(null);
   const [planType, setPlanType] = useState('starter');
 
-  // Интерактивен рейтинг с начална стойност 4.9 и 235 гласа
-  const [userRating, setUserRating] = useState(0);
-  const [rated, setRated] = useState(false);
+  // Състояния за отзиви и рейтинг
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState('');
+  const [reviewMessage, setReviewMessage] = useState('');
   const [totalReviews, setTotalReviews] = useState(235);
   const [averageRating, setAverageRating] = useState(4.9);
 
@@ -36,35 +38,68 @@ export default function Home() {
       setEmail(saved);
       loadUser(saved);
     }
+    fetchReviews();
   }, []);
 
-const loadUser = async (uEmail) => {
-  try {
-    let { data } = await supabase.from('users').select('*').eq('email', uEmail).single();
-    if (data) {
-      setIsLoggedIn(true);
-      setIsSubscribed(data.is_subscribed);
-      const userPlan = data.plan_type || 'starter';
-      setPlanType(userPlan);
+  const loadUser = async (uEmail) => {
+    try {
+      let { data } = await supabase.from('users').select('*').eq('email', uEmail).single();
+      if (data) {
+        setIsLoggedIn(true);
+        setIsSubscribed(data.is_subscribed);
+        const userPlan = data.plan_type || 'starter';
+        setPlanType(userPlan);
 
-      if (userPlan === 'admin' || userPlan === 'pro') {
-        setGenerationsLeft(999);
-      } else {
-        setGenerationsLeft(data.generations_left);
+        if (userPlan === 'admin' || userPlan === 'pro') {
+          setGenerationsLeft(999);
+        } else {
+          setGenerationsLeft(data.generations_left);
+        }
       }
+    } catch (e) { console.error(e); }
+  };
+
+  const fetchReviews = async () => {
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (!error && data) {
+      setReviews(data);
     }
-  } catch (e) { console.error(e); }
-};
+  };
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    if (!email || !comment) {
+      setReviewMessage('Моля, попълнете всички полета!');
+      return;
+    }
+
+    setLoading(true);
+    const { error } = await supabase
+      .from('reviews')
+      .insert([{ user_email: email, rating: Number(rating), comment }]);
+
+    setLoading(false);
+
+    if (error) {
+      setReviewMessage('Грешка при изпращането: ' + error.message);
+    } else {
+      setReviewMessage('Благодарим ви за отзива!');
+      setComment('');
+      fetchReviews();
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email.includes('@')) { setError('Моля, въведете валиден имейл адрес.'); return; }
     setLoading(true); setError('');
     try {
-      // 1. Регистрира/Записва имейла автоматично в Supabase Auth Users
       await supabase.auth.signInWithOtp({ email });
 
-      // 2. Проверява/създава профила в таблица users
       let { data } = await supabase.from('users').select('*').eq('email', email).single();
       if (!data) {
         const { data: nUser } = await supabase.from('users').insert([{ email, generations_left: 1, is_subscribed: false }]).select().single();
@@ -77,7 +112,6 @@ const loadUser = async (uEmail) => {
         setIsSubscribed(data.is_subscribed);
         setGenerationsLeft(data.generations_left);
         setPlanType(data.plan_type || 'starter');
-
       }
     } catch (err) { setError('Грешка при вход. Опитайте отново.'); }
     finally { setLoading(false); }
@@ -86,17 +120,6 @@ const loadUser = async (uEmail) => {
   const handleLogout = () => {
     localStorage.removeItem('shortsEngine_email');
     setIsLoggedIn(false); setEmail(''); setResult('');
-  };
-
-  const handleRate = (stars) => {
-    if (rated) return;
-    setUserRating(stars);
-    setRated(true);
-    // Пресмятаме нов среден рейтинг динамично
-    const newTotal = totalReviews + 1;
-    const newAvg = ((averageRating * totalReviews + stars) / newTotal).toFixed(1);
-    setTotalReviews(newTotal);
-    setAverageRating(newAvg);
   };
 
   const handleGenerate = async (e) => {
@@ -129,19 +152,23 @@ const loadUser = async (uEmail) => {
   };
 
   const faqs = [
-  {
-    question: "Как точно работи ShortsEngine AI?",
-    answer: "ShortsEngine AI използва усъвършенствани алгоритми за анализиране на вирусни трендове. Просто въвеждате вашата ниша или тема, а платформата автоматично генерира структуриран сценарий с грабваща кукичка (Hook), основно съдържание, призив към действие (CTA) и вирусни хаштагове."
-  },
-  {
-    question: "Мога ли да се откажа от абонамента си по всяко време?",
-    answer: "Да, абсолютно! Няма обвързващи дългосрочни договорености. Можете да прекратите абонамента си с един клик по всяко време от вашия профил и няма да бъдете таксувани повече."
-  },
-  {
-    question: "Поддържа ли се български език?",
-    answer: "Да, ShortsEngine AI поддържа генериране на съдържание на български, английски и над 20 други езика. Можете да създавате видеа за местния пазар или да таргетирате международна публика."
-  }
-];
+    {
+      question: "Как точно работи ShortsEngine AI?",
+      answer: "ShortsEngine AI използва усъвършенствани алгоритми за анализиране на вирусни трендове. Просто въвеждате вашата ниша или тема, а платформата автоматично генерира структуриран сценарий с грабваща кукичка (Hook), основно съдържание, призив към действие (CTA) и вирусни хаштагове."
+    },
+    {
+      question: "Мога ли да се откажа от абонамента си по всяко време?",
+      answer: "Да, абсолютно! Няма обвързващи дългосрочни договорености. Можете да прекратите абонамента си с един клик по всяко време от вашия профил и няма да бъдете таксувани повече."
+    },
+    {
+      question: "Поддържа ли се български език?",
+      answer: "Да, ShortsEngine AI поддържа генериране на съдържание на български, английски и над 20 други езика. Можете да създавате видеа за местния пазар или да таргетирате международна публика."
+    }
+  ];
+
+  const avgReviewsRating = reviews.length > 0 
+    ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) 
+    : averageRating;
 
   return (
     <div style={{
@@ -187,83 +214,7 @@ const loadUser = async (uEmail) => {
           <p style={{ color: '#94a3b8', fontSize: '0.98rem', margin: '0 0 16px 0', fontWeight: '500', lineHeight: '1.4' }}>
             Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
-
-          {/* REVIEWS SECTION */}
-      <section style={{ padding: '60px 20px', maxWidth: '800px', margin: '0 auto' }}>
-        <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '10px' }}>
-          Оценки и Отзиви
-        </h2>
-        <p style={{ textAlign: 'center', fontSize: '1.2rem', marginBottom: '30px', color: '#ffb400' }}>
-          ★ {avgRating} / 5.0 ({reviews.length} {reviews.length === 1 ? 'отзив' : 'отзива'})
-        </p>
-
-        {/* Форма за изпращане */}
-        <form onSubmit={handleSubmitReview} style={{ background: '#111', padding: '20px', borderRadius: '12px', marginBottom: '40px', border: '1px solid #222' }}>
-          <h3 style={{ marginBottom: '15px', fontSize: '1.1rem' }}>Оставете вашия отзив</h3>
-          
-          {message && <p style={{ color: message.includes('Грешка') ? 'red' : 'green', marginBottom: '15px' }}>{message}</p>}
-
-          <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Имейл:</label>
-            <input 
-              type="email" 
-              required 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="vashiyat@email.com"
-              style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #333', background: '#222', color: '#fff' }}
-            />
-          </div>
-
-          <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Оценка:</label>
-            <select 
-              value={rating} 
-              onChange={(e) => setRating(e.target.value)}
-              style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #333', background: '#222', color: '#fff' }}
-            >
-              <option value="5">5 ★★★★★ (Отлично)</option>
-              <option value="4">4 ★★★★☆ (Много добро)</option>
-              <option value="3">3 ★★★☆☆ (Добро)</option>
-              <option value="2">2 ★★☆☆☆ (Средно)</option>
-              <option value="1">1 ★☆☆☆☆ (Слабо)</option>
-            </select>
-          </div>
-
-          <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Коментар:</label>
-            <textarea 
-              required 
-              rows="3" 
-              value={comment} 
-              onChange={(e) => setComment(e.target.value)}
-              placeholder="Напишете вашето мнение..."
-              style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #333', background: '#222', color: '#fff' }}
-            />
-          </div>
-
-          <button 
-            type="submit" 
-            disabled={loading}
-            style={{ width: '100%', padding: '12px', borderRadius: '6px', border: 'none', background: '#0070f3', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
-          >
-            {loading ? 'Изпращане...' : 'Публикувай отзив'}
-          </button>
-        </form>
-
-        {/* Списък с последни ревюта */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          {reviews.map((rev) => (
-            <div key={rev.id} style={{ padding: '15px', background: '#161616', borderRadius: '8px', border: '1px solid #222' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontWeight: 'bold', color: '#aaa' }}>{rev.user_email}</span>
-                <span style={{ color: '#ffb400' }}>{'★'.repeat(rev.rating)}</span>
-              </div>
-              <p style={{ margin: 0, color: '#ddd' }}>{rev.comment}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        </header>
 
         {!isLoggedIn ? (
           /* LOGIN CARD */
@@ -275,7 +226,7 @@ const loadUser = async (uEmail) => {
             padding: '28px 20px',
             textAlign: 'center',
             maxWidth: '440px',
-            margin: '0 auto',
+            margin: '0 auto 35px auto',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)'
           }}>
             <h2 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '6px', color: '#fff' }}>Започни напълно безплатно</h2>
@@ -379,14 +330,13 @@ const loadUser = async (uEmail) => {
                     fontSize: '0.75rem',
                     fontWeight: '800'
                   }}>
-              {planType === 'admin' ? (
-  <span style={{ color: '#ef4444', fontWeight: 'bold' }}>👑 Admin План</span>
-) : planType === 'pro' ? (
-  <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>⚡ Pro План</span>
-) : (
-  isSubscribed ? '🔥 Неограничен' : `🔥 Опити: ${generationsLeft}`
-)}
-
+                    {planType === 'admin' ? (
+                      <span style={{ color: '#ef4444', fontWeight: 'bold' }}>👑 Admin План</span>
+                    ) : planType === 'pro' ? (
+                      <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>⚡ Pro План</span>
+                    ) : (
+                      isSubscribed ? '🔥 Неограничен' : `🔥 Опити: ${generationsLeft}`
+                    )}
                   </span>
                   <button
                     onClick={handleLogout}
@@ -536,49 +486,129 @@ const loadUser = async (uEmail) => {
                 </div>
               )}
             </div>
+          </>
+        )}
 
-            {/* PRICING SECTION */}
-            {!isSubscribed && (
-              <div id="pricing-section">
-                <PricingSection STRIPE_STARTER_LINK={STRIPE_STARTER_LINK} STRIPE_PRO_LINK={STRIPE_PRO_LINK} />
-              </div>
-            )}
+        {/* PRICING SECTION */}
+        {!isSubscribed && (
+          <div id="pricing-section">
+            <PricingSection STRIPE_STARTER_LINK={STRIPE_STARTER_LINK} STRIPE_PRO_LINK={STRIPE_PRO_LINK} />
+          </div>
+        )}
 
-            {/* FAQ SECTION */}
-      <section style={{ maxWidth: '800px', margin: '0 auto 80px auto', padding: '0 16px', color: '#fff' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '2rem', fontWeight: '900' }}>
-          Често задавани въпроси
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              onClick={() => setOpenFaq(openFaq === index ? null : index)}
-              style={{
-                background: 'rgba(15, 23, 42, 0.6)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '14px',
-                padding: '16px 18px',
-                cursor: 'pointer'
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: '700', color: '#fff', fontSize: '1rem' }}>
-                <span>{faq.question}</span>
-                <span>{openFaq === index ? '▲' : '▼'}</span>
-              </div>
-              {openFaq === index && (
-                <div style={{ marginTop: '12px', color: '#94a3b8', fontSize: '0.925rem', lineHeight: '1.5' }}>
-                  {faq.answer}
-                </div>
-              )}
+        {/* REVIEWS SECTION */}
+        <section style={{ padding: '40px 0', maxWidth: '780px', margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '10px', fontWeight: '900' }}>
+            Оценки и Отзиви
+          </h2>
+          <p style={{ textAlign: 'center', fontSize: '1.2rem', marginBottom: '30px', color: '#ffb400' }}>
+            ★ {avgReviewsRating} / 5.0 ({reviews.length} {reviews.length === 1 ? 'отзив' : 'отзива'})
+          </p>
+
+          {/* Форма за изпращане */}
+          <form onSubmit={handleSubmitReview} style={{ background: 'rgba(15, 23, 42, 0.75)', padding: '20px', borderRadius: '16px', marginBottom: '30px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+            <h3 style={{ marginBottom: '15px', fontSize: '1.1rem', color: '#fff' }}>Оставете вашия отзив</h3>
+            
+            {reviewMessage && <p style={{ color: reviewMessage.includes('Грешка') ? '#f87171' : '#4ade80', marginBottom: '15px', fontWeight: 600 }}>{reviewMessage}</p>}
+
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.85rem', color: '#94a3b8' }}>Имейл:</label>
+              <input 
+                type="email" 
+                required 
+                value={email || ''} 
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="vashiyat@email.com"
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.15)', background: '#04060b', color: '#fff', boxSizing: 'border-box' }}
+              />
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* FOOTER */}
-      <Footer />
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.85rem', color: '#94a3b8' }}>Оценка:</label>
+              <select 
+                value={rating} 
+                onChange={(e) => setRating(e.target.value)}
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.15)', background: '#04060b', color: '#fff', boxSizing: 'border-box' }}
+              >
+                <option value="5">5 ★★★★★ (Отлично)</option>
+                <option value="4">4 ★★★★☆ (Много добро)</option>
+                <option value="3">3 ★★★☆☆ (Добро)</option>
+                <option value="2">2 ★★☆☆☆ (Средно)</option>
+                <option value="1">1 ★☆☆☆☆ (Слабо)</option>
+              </select>
+            </div>
 
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.85rem', color: '#94a3b8' }}>Коментар:</label>
+              <textarea 
+                required 
+                rows="3" 
+                value={comment} 
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Напишете вашето мнение..."
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.15)', background: '#04060b', color: '#fff', boxSizing: 'border-box' }}
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={loading}
+              style={{ width: '100%', padding: '14px', borderRadius: '10px', border: 'none', background: '#3b82f6', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
+            >
+              {loading ? 'Изпращане...' : 'Публикувай отзив'}
+            </button>
+          </form>
+
+          {/* Списък с последни ревюта */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            {reviews.map((rev) => (
+              <div key={rev.id} style={{ padding: '16px', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <span style={{ fontWeight: 'bold', color: '#cbd5e1', fontSize: '0.9rem' }}>{rev.user_email}</span>
+                  <span style={{ color: '#ffb400' }}>{'★'.repeat(rev.rating)}</span>
+                </div>
+                <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.925rem', lineHeight: '1.5' }}>{rev.comment}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQ SECTION */}
+        <section style={{ margin: '40px 0 80px 0', color: '#fff' }}>
+          <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '2rem', fontWeight: '900' }}>
+            Често задавани въпроси
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                style={{
+                  background: 'rgba(15, 23, 42, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '14px',
+                  padding: '16px 18px',
+                  cursor: 'pointer'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: '700', color: '#fff', fontSize: '1rem' }}>
+                  <span>{faq.question}</span>
+                  <span>{openFaq === index ? '▲' : '▼'}</span>
+                </div>
+                {openFaq === index && (
+                  <div style={{ marginTop: '12px', color: '#94a3b8', fontSize: '0.925rem', lineHeight: '1.5' }}>
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <Footer />
+
+      </div>
     </div>
   );
 }
