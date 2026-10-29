@@ -188,40 +188,82 @@ const loadUser = async (uEmail) => {
             Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
 
-          {/* RATING & REVIEWS SECTION */}
-<div style={{
-  background: 'rgba(30, 41, 59, 0.7)',
-  border: '1px solid rgba(255, 255, 255, 0.1)',
-  borderRadius: '16px',
-  padding: '16px 24px',
-  maxWidth: '480px',
-  margin: '0 auto 20px auto',
-  textAlign: 'center',
-  color: '#fff'
-}}>
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '8px' }}>
-    <span style={{ color: '#f59e0b', fontSize: '1.2rem' }}>★★★★★</span>
-    <strong style={{ fontSize: '1.05rem' }}>4.9/5</strong>
-    <span style={{ color: '#94a3b8', fontSize: '0.9rem' }}>| От 235 творци</span>
-  </div>
+          {/* REVIEWS SECTION */}
+      <section style={{ padding: '60px 20px', maxWidth: '800px', margin: '0 auto' }}>
+        <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '10px' }}>
+          Оценки и Отзиви
+        </h2>
+        <p style={{ textAlign: 'center', fontSize: '1.2rem', marginBottom: '30px', color: '#ffb400' }}>
+          ★ {avgRating} / 5.0 ({reviews.length} {reviews.length === 1 ? 'отзив' : 'отзива'})
+        </p>
 
-  <div>
-    <p style={{ fontSize: '0.875rem', color: '#cbd5e1', marginBottom: '8px' }}>
-      Оцени платформата:
-    </p>
+        {/* Форма за изпращане */}
+        <form onSubmit={handleSubmitReview} style={{ background: '#111', padding: '20px', borderRadius: '12px', marginBottom: '40px', border: '1px solid #222' }}>
+          <h3 style={{ marginBottom: '15px', fontSize: '1.1rem' }}>Оставете вашия отзив</h3>
+          
+          {message && <p style={{ color: message.includes('Грешка') ? 'red' : 'green', marginBottom: '15px' }}>{message}</p>}
 
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', fontSize: '1.6rem', cursor: 'pointer', marginBottom: '10px' }}>
-      {[1, 2, 3, 4, 5].map((star) => (
-        <span
-          key={star}
-          style={{ color: '#f59e0b' }}
-        >
-          ★
-        </span>
-      ))}
-    </div>
-  </div>
-</div>
+          <div style={{ marginBottom: '15px' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>Имейл:</label>
+            <input 
+              type="email" 
+              required 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="vashiyat@email.com"
+              style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #333', background: '#222', color: '#fff' }}
+            />
+          </div>
+
+          <div style={{ marginBottom: '15px' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>Оценка:</label>
+            <select 
+              value={rating} 
+              onChange={(e) => setRating(e.target.value)}
+              style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #333', background: '#222', color: '#fff' }}
+            >
+              <option value="5">5 ★★★★★ (Отлично)</option>
+              <option value="4">4 ★★★★☆ (Много добро)</option>
+              <option value="3">3 ★★★☆☆ (Добро)</option>
+              <option value="2">2 ★★☆☆☆ (Средно)</option>
+              <option value="1">1 ★☆☆☆☆ (Слабо)</option>
+            </select>
+          </div>
+
+          <div style={{ marginBottom: '15px' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>Коментар:</label>
+            <textarea 
+              required 
+              rows="3" 
+              value={comment} 
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Напишете вашето мнение..."
+              style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #333', background: '#222', color: '#fff' }}
+            />
+          </div>
+
+          <button 
+            type="submit" 
+            disabled={loading}
+            style={{ width: '100%', padding: '12px', borderRadius: '6px', border: 'none', background: '#0070f3', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}
+          >
+            {loading ? 'Изпращане...' : 'Публикувай отзив'}
+          </button>
+        </form>
+
+        {/* Списък с последни ревюта */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          {reviews.map((rev) => (
+            <div key={rev.id} style={{ padding: '15px', background: '#161616', borderRadius: '8px', border: '1px solid #222' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ fontWeight: 'bold', color: '#aaa' }}>{rev.user_email}</span>
+                <span style={{ color: '#ffb400' }}>{'★'.repeat(rev.rating)}</span>
+              </div>
+              <p style={{ margin: 0, color: '#ddd' }}>{rev.comment}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
         {!isLoggedIn ? (
           /* LOGIN CARD */
