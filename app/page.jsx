@@ -188,45 +188,40 @@ const loadUser = async (uEmail) => {
             Превърни всяка идея в пристрастяващ скрипт за TikTok, Reels и YouTube Shorts с помощта на AI.
           </p>
 
-          {/* RATING BADGE & INTERACTIVE RATING */}
-          <div style={{
-            display: 'inline-flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '10px 18px',
-            background: 'rgba(15, 23, 42, 0.85)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            borderRadius: '20px',
-            fontSize: '0.85rem',
-            color: '#cbd5e1',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.4)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ color: '#f59e0b', fontSize: '1rem', letterSpacing: '1px' }}>⭐⭐⭐⭐⭐</span>
-              <span style={{ fontWeight: '700', color: '#fff' }}>{averageRating}/5</span>
-              <span style={{ color: '#64748b' }}>|</span>
-              <span style={{ color: '#94a3b8' }}>От <strong>{totalReviews}</strong> творци</span>
-            </div>
-            
-            <div style={{ fontSize: '0.78rem', color: '#94a3b8', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '6px', width: '100%', textAlign: 'center' }}>
-              {rated ? (
-                <span style={{ color: '#4ade80', fontWeight: 600 }}>✨ Благодарим ти за оценката!</span>
-              ) : (
-                <span>Оцени платформата: {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    onClick={() => handleRate(star)}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', padding: '0 2px' }}
-                    title={`Оцени с ${star} звезди`}
-                  >
-                    ⭐
-                  </button>
-                ))}</span>
-              )}
-            </div>
-          </div>
-        </header>
+          {/* RATING & REVIEWS SECTION */}
+<div style={{
+  background: 'rgba(30, 41, 59, 0.7)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
+  borderRadius: '16px',
+  padding: '16px 24px',
+  maxWidth: '480px',
+  margin: '0 auto 20px auto',
+  textAlign: 'center',
+  color: '#fff'
+}}>
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '8px' }}>
+    <span style={{ color: '#f59e0b', fontSize: '1.2rem' }}>★★★★★</span>
+    <strong style={{ fontSize: '1.05rem' }}>4.9/5</strong>
+    <span style={{ color: '#94a3b8', fontSize: '0.9rem' }}>| От 235 творци</span>
+  </div>
+
+  <div>
+    <p style={{ fontSize: '0.875rem', color: '#cbd5e1', marginBottom: '8px' }}>
+      Оцени платформата:
+    </p>
+
+    <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', fontSize: '1.6rem', cursor: 'pointer', marginBottom: '10px' }}>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          style={{ color: '#f59e0b' }}
+        >
+          ★
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
 
         {!isLoggedIn ? (
           /* LOGIN CARD */
