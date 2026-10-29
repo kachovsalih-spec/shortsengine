@@ -532,12 +532,12 @@ const loadUser = async (uEmail) => {
         )}
       </div>
     ))}
+      </div>
+    </section>
+
+    {/* FOOTER */}
+    <Footer />
+
   </div>
-</section>
-
-        {/* FOOTER */}
-        <Footer />
-
-    </div>
-  );
+);
 }
