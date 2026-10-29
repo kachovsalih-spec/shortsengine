@@ -498,34 +498,39 @@ const loadUser = async (uEmail) => {
               </div>
             )}
 
-            {/* FAQ SECTION */}
-            <section style={{ maxWidth: '700px', margin: '0 auto 30px auto' }}>
-              <h3 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '1.3rem', fontWeight: 800, color: '#fff' }}>Често задавани въпроси ❓</h3>
-              {faqs.map((f, i) => (
-                <div
-                  key={i}
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  style={{
-                    background: 'rgba(15, 23, 42, 0.6)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '14px',
-                    padding: '16px 18px',
-                    marginBottom: '10px',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>
-                    <span>{f.q}</span>
-                    <span style={{ color: '#ef4444', fontSize: '1.1rem' }}>{openFaq === i ? '-' : '+'}</span>
-                  </div>
-                  {openFaq === i && (
-                    <p style={{ color: '#94a3b8', marginTop: '10px', fontSize: '0.88rem', lineHeight: '1.5' }}>
-                      {f.a}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </section>
+          {/* FAQ SECTION */}
+<section style={{ maxWidth: '800px', margin: '0 auto 80px auto', padding: '0 16px', color: '#fff' }}>
+  <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '2rem', fontWeight: '900' }}>
+    Често задавани въпроси
+  </h2>
+  
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    {faqs.map((faq, index) => (
+      <div 
+        key={index}
+        onClick={() => setOpenFaq(openFaq === index ? null : index)}
+        style={{
+          background: 'rgba(15, 23, 42, 0.6)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '14px',
+          padding: '16px 18px',
+          cursor: 'pointer'
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: '700', color: '#fff', fontSize: '1rem' }}>
+          <span>{faq.question}</span>
+          <span>{openFaq === index ? '▲' : '▼'}</span>
+        </div>
+        {openFaq === index && (
+          <div style={{ marginTop: '12px', color: '#94a3b8', fontSize: '0.925rem', lineHeight: '1.5' }}>
+            {faq.answer}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
           </>
         )}
 
