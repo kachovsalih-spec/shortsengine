@@ -356,23 +356,51 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 💬 Discord бутон (Интегриран в таблото) */}
-              <div className="mb-6 p-4 bg-slate-900/90 rounded-xl border border-slate-800 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="text-left">
-                  <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                    💬 The Creators Club
-                  </h4>
-                  <p className="text-slate-400 text-xs mt-0.5">
-                    Влез в нашия Discord сървър за вирусни стратегии и идеи.
+            {/* 💬 МАРКЕТИНГОВ ДИСКОРД БАНЕР */}
+              <div style={{
+                marginTop: '10px',
+                marginBottom: '24px',
+                padding: '24px',
+                background: 'linear-gradient(135deg, rgba(88, 101, 242, 0.2) 0%, rgba(15, 23, 42, 0.9) 100%)',
+                border: '1px solid rgba(88, 101, 242, 0.5)',
+                borderRadius: '18px',
+                textAlign: 'center',
+                boxShadow: '0 10px 30px rgba(88, 101, 242, 0.25)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '14px'
+              }}>
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: '900', color: '#fff', margin: '0 0 4px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    💬 Влез в затворения клуб на създателите
+                  </h3>
+                  <p style={{ color: '#94a3b8', fontSize: '0.88rem', margin: 0, fontWeight: '500' }}>
+                    Получи топ вирусни кукички, стратегии и подкрепа от други креативни умове.
                   </p>
                 </div>
                 <a
                   href="https://discord.gg/jCEXQYKYFn"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#5865F2] hover:bg-[#4752C4] text-white text-xs font-bold rounded-lg transition duration-200 shadow-md whitespace-nowrap"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    width: '100%',
+                    padding: '14px 24px',
+                    background: '#5865F2',
+                    color: '#fff',
+                    borderRadius: '12px',
+                    fontSize: '0.98rem',
+                    fontWeight: '800',
+                    textDecoration: 'none',
+                    boxShadow: '0 6px 20px rgba(88, 101, 242, 0.4)',
+                    transition: 'all 0.2s ease'
+                  }}
                 >
-                  Влез в Discord 🚀
+                  Присъедини се към The Creators Club 🚀
                 </a>
               </div>
 
