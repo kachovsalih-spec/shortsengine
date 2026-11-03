@@ -16,40 +16,69 @@ export default function Home() {
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
 
-  const [generationsLeft, setGenerationsLeft] = useState(3); // 👈 Тук вече е 3!
+  const [generationsLeft, setGenerationsLeft] = useState(3);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [planType, setPlanType] = useState('starter');
 
   return (
     <main className="min-h-screen bg-slate-950 text-white p-6">
-      {/* Главният контейнер на твоя сайт */}
       <div className="max-w-4xl mx-auto pt-10">
         <h1 className="text-3xl font-extrabold text-center mb-6">ShortsEngine AI</h1>
         
-        {/* Тук ще си седи твоят генератор и останал интерфейс */}
+        {/* Основна секция на генератора */}
+        <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
+          <p className="text-slate-400 text-center mb-4">
+            Оставащи безплатни опита: <span className="text-white font-bold">{generationsLeft}</span>
+          </p>
+          
+          {/* Тук си е твоята форма за въвеждане на промпт */}
+          <textarea
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Въведете тема за вашето видео..."
+            className="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-indigo-500 mb-4 h-32"
+          />
 
-        {/* 💬 Discord бутон (показва се само когато потребителят е влязъл) */}
-        {isLoggedIn && (
-          <div className="mt-8 p-6 bg-slate-900/80 rounded-2xl border border-slate-800 text-center flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-left">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                💬 Присъедини се към The Creators Club
-              </h3>
-              <p className="text-slate-400 text-sm mt-1">
-                Влез в затворения ни Discord сървър за вирусни идеи, стратегии и подкрепа от общността.
-              </p>
+          <button
+            onClick={() => {
+              if (generationsLeft > 0) {
+                setGenerationsLeft(generationsLeft - 1);
+                setResult("Примерен генериран скрипт за твоето видео...");
+              }
+            }}
+            className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition duration-200 shadow-lg"
+          >
+            Генерирай скрипт ⚡
+          </button>
+
+          {result && (
+            <div className="mt-6 p-4 bg-slate-950 border border-slate-800 rounded-xl">
+              <h3 className="font-bold text-indigo-400 mb-2">Резултат:</h3>
+              <p className="text-slate-300">{result}</p>
             </div>
-            <a
-              href="https://discord.gg/jCEXQYKYFn"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition duration-200 shadow-lg whitespace-nowrap"
-            >
-              Влез в Discord 🚀
-            </a>
+          )}
+        </div>
+
+        {/* 💬 Discord бутон (показва се винаги или при логин) */}
+        <div className="mt-8 p-6 bg-slate-900/80 rounded-2xl border border-slate-800 text-center flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-left">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              💬 Присъедини се към The Creators Club
+            </h3>
+            <p className="text-slate-400 text-sm mt-1">
+              Влез в затворения ни Discord сървър за вирусни идеи, стратегии и подкрепа от общността.
+            </p>
           </div>
-        )}
+          <a
+            href="https://discord.gg/jCEXQYKYFn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition duration-200 shadow-lg whitespace-nowrap"
+          >
+            Влез в Discord 🚀
+          </a>
+        </div>
       </div>
     </main>
   );
