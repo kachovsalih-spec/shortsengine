@@ -21,6 +21,31 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState(null);
   const [planType, setPlanType] = useState('starter');
 
+  export default function Home() {
+
+  return (
+  
+      {isLoggedIn && (
+        <div className="max-w-4xl mx-auto mt-8 p-6 bg-slate-900/80 rounded-2xl border border-slate-800 text-center flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-left">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              💬 Присъедини се към The Creators Club
+            </h3>
+            <p className="text-slate-400 text-sm mt-1">
+              Влез в затворения ни Discord сървър за вирусни идеи, стратегии и подкрепа от общността.
+            </p>
+          </div>
+          <a
+            href="https://discord.gg/jCEXQYKYFn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition duration-200 shadow-lg whitespace-nowrap"
+          >
+            Влез в Discord 🚀
+          </a>
+        </div>
+      )}
+  
   // Състояния за отзиви и рейтинг
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(5);
