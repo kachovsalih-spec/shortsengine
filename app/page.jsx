@@ -15,36 +15,45 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
- 
-  const [generationsLeft, setGenerationsLeft] = useState(1);
+
+  const [generationsLeft, setGenerationsLeft] = useState(3); // 👈 Тук вече е 3!
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [planType, setPlanType] = useState('starter');
 
-  export default function Home() {
-
   return (
-  
-      {isLoggedIn && (
-        <div className="max-w-4xl mx-auto mt-8 p-6 bg-slate-900/80 rounded-2xl border border-slate-800 text-center flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-left">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              💬 Присъедини се към The Creators Club
-            </h3>
-            <p className="text-slate-400 text-sm mt-1">
-              Влез в затворения ни Discord сървър за вирусни идеи, стратегии и подкрепа от общността.
-            </p>
+    <main className="min-h-screen bg-slate-950 text-white p-6">
+      {/* Главният контейнер на твоя сайт */}
+      <div className="max-w-4xl mx-auto pt-10">
+        <h1 className="text-3xl font-extrabold text-center mb-6">ShortsEngine AI</h1>
+        
+        {/* Тук ще си седи твоят генератор и останал интерфейс */}
+
+        {/* 💬 Discord бутон (показва се само когато потребителят е влязъл) */}
+        {isLoggedIn && (
+          <div className="mt-8 p-6 bg-slate-900/80 rounded-2xl border border-slate-800 text-center flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-left">
+              <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                💬 Присъедини се към The Creators Club
+              </h3>
+              <p className="text-slate-400 text-sm mt-1">
+                Влез в затворения ни Discord сървър за вирусни идеи, стратегии и подкрепа от общността.
+              </p>
+            </div>
+            <a
+              href="https://discord.gg/jCEXQYKYFn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition duration-200 shadow-lg whitespace-nowrap"
+            >
+              Влез в Discord 🚀
+            </a>
           </div>
-          <a
-            href="https://discord.gg/jCEXQYKYFn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold rounded-xl transition duration-200 shadow-lg whitespace-nowrap"
-          >
-            Влез в Discord 🚀
-          </a>
-        </div>
-      )}
+        )}
+      </div>
+    </main>
+  );
+}
   
   // Състояния за отзиви и рейтинг
   const [reviews, setReviews] = useState([]);
