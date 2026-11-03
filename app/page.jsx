@@ -102,7 +102,7 @@ export default function Home() {
 
       let { data } = await supabase.from('users').select('*').eq('email', email).single();
       if (!data) {
-        const { data: nUser } = await supabase.from('users').insert([{ email, generations_left: 1, is_subscribed: false }]).select().single();
+        const { data: nUser } = await supabase.from('users').insert([{ email, generations_left: 3, is_subscribed: false }]).select().single();
         data = nUser;
       }
 
